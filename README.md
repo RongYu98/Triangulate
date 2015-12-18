@@ -1,16 +1,7 @@
 # Triangulate
 *By Jason Shin, Franklin Wang, Rong Yu, and Masahero Masuda*
 
-##Tools We Will Use:
-* Google Maps API
-* Mongodb for users who want to track where they have been
-* MTA/Uber API for transportation
-* Geolocation API
-
-##What We Don't Know How to Do:
-* Getting the locations of other people you want to meet up with.
-
-##The Plan
+##What's this app?
 * Triangulate is an application that will allow you to find the most
   convenient location for you and your friends to meet up, whether
   it be to grab a bite or watch a movie.
@@ -22,8 +13,24 @@
   arrive at.
 * Live feed of where you and your friends are on a map (using AJAX calls)
 * Friend other users
-  * Use home address if not connected to the app, else 
-  * In order to send users' locations, the program will take the current
-    location of the user, store it in a database, then your friend will
-    be able to access it.
+  * Use home address if not connected to the app, else...
+  * Our program will use the Geolocation API to take the current location of the
+    user and store it in a database so your friends can access it.
 * Have a page where you can invite people (Chatroom of sorts)
+
+##Tools We Will Use:
+* Google Maps API
+* Mongodb for users who want to track where they have been
+* MTA/Uber API for transportation
+* Geolocation API
+
+##What We Don't Know How to Do:
+* Getting the locations of other people you want to meet up with.
+
+## Team Roles
+|Person            |Role           |
+|------------------|---------------|
+| Franklin Wang    |Leader	   |
+| Masahero Masuda  |Frontend       |
+| Jason Shin       |Backend        |
+| Rong Yu	   |Middleware     |
