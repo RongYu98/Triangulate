@@ -22,8 +22,8 @@
   arrive at.
 * Live feed of where you and your friends are on a map (using AJAX calls)
 * Friend other users
-..* Use home address if not connected to the app, else
-..* In order to send users' locations, the program will take the current
-   location of the user, store it in a database, then your friend will
-   be able to access it.
+⋅⋅* Use home address if not connected to the app, else
+⋅⋅* In order to send users' locations, the program will take the current
+    location of the user, store it in a database, then your friend will
+    be able to access it.
 * Have a page where you can invite people (Chatroom of sorts)
