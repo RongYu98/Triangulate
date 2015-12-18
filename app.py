@@ -18,6 +18,16 @@ def main():
     
     #return render_template("Artist.html",images=final,artist=artist,Tracks = Tracks)
 
+@app.route("/name")
+def nameToNumbers():
+    add = "1600+Amphitheatre+Parkway,+Mountain+View,+CA"
+    key = "AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
+    query = "https://maps.googleapis.com/maps/api/geocode/json?address="+add+"&key="+key
+    request = urllib2.urlopen(query)
+    result = request.read()
+    result = json.loads(result)
+    return jsonify(result)
+
 if (__name__ == "__main__"):
         app.debug = True
         app.secret_key = "secret"
