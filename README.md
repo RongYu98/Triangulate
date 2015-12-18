@@ -1,5 +1,5 @@
 # Triangulate
-* By Jason Shin, Franklin Wang, Rong Yu, and Masahero Masuda*
+* By Jason Shin, Franklin Wang, Rong Yu, and Masahero Masuda
 
 ## What's this app?
 * Triangulate is an application that will allow you to find the most
