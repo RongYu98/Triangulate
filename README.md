@@ -15,7 +15,6 @@
 * Accounts
   * Records places you've been to.
   * Friend users to meet up with them (Maybe a meet-with-strangers feature?).
-  * 
   
 * Have a page where you can invite people to your event
   * Chatroom to talk to others going to your event/meetup.
