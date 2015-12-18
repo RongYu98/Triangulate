@@ -1,5 +1,5 @@
 # Triangulate
-*By Jason Shin, Franklin Wang, and Rong Yu*
+*By Jason Shin, Franklin Wang, Rong Yu, and Masahero Masuda*
 
 ##Tools We Will Use:
 * Google Maps API
