@@ -7,6 +7,7 @@ def numTo(lat, long):
     request = urllib2.urlopen(basic)
     result = request.read()
     result = json.loads(result)
+    
     return jsonify(result)
     #return result
 
@@ -20,3 +21,9 @@ def nameTo(add):
     result = request.read()
     result = json.loads(result)
     return jsonify(result)
+
+
+def randStuff():
+    #lat = result["results"][0]["geometry"]["location"]["lat"]
+    #lng = result["results"][0]["geometry"]["location"]["lng"]
+    pass
