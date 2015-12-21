@@ -37,7 +37,7 @@
 ## Team Roles
 |Person            |Role           |
 |------------------|---------------|
-| Franklin Wang    |Leader	   |
+| Franklin Wang    |Leader	       |
 | Masahero Masuda  |Frontend       |
 | Jason Shin       |Backend        |
-| Rong Yu	   |Middleware     |
+| Rong Yu	         |Middleware     |
