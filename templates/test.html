@@ -1,0 +1,16 @@
+
+<form method = "POST">
+  Search for a location: 
+  <input type = "text" name = "place" placeholder="Stuyvesant"></input>
+  <input type="submit" name="button" value="find"></input>
+</form>
+
+
+
+{% if lat %}
+lat: {{lat}}
+{% endif %}
+
+{% if lng %}
+lat: {{lng}}
+{% endif %}
