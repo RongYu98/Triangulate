@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, jsonify, util
+from flask import Flask, render_template, request, jsonify
 import urllib2
 import json
+import util
 
 app = Flask(__name__)
 
@@ -14,7 +15,11 @@ def main():
     request = urllib2.urlopen(basic)
     result = request.read()
     result = json.loads(result)
-    return jsonify(result)
+    #lat = result["results"][0]["geometry"]["location"]["lat"]
+    #lng = result["results"][0]["geometry"]["location"]["lng"]
+    print result["results"][0]
+    return jsonify(result["results"][0])
+    #return jsonify(result)
     
     #return render_template("Artist.html",images=final,artist=artist,Tracks = Tracks)
 
