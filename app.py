@@ -31,11 +31,25 @@ def index():
 def nameToNumbers():
     add = "1600+Amphitheatre+Parkway,+Mountain+View,+CA"
     key = "AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
-    query = "https://maps.googleapis.com/maps/api/geocode/json?address="+add+"&key="+key
+    query = "https://www.maps.googleapis.com/maps/api/geocode/json?address="+add+"&key="+key
     request = urllib2.urlopen(query)
     result = request.read()
     result = json.loads(result)
     return jsonify(result)
+
+@app.route("/test",methods=["GET","POST"])
+def test():
+    if request.method == "GET":
+        return render_template("test.html")
+    else:
+        #request.method == "GET":
+        query = request.form["place"]
+        print(request.form["place"])
+        stuff = util.nameTo(query)
+        return render_template("test.html", loc = query, lat = stuff["lat"], lng = stuff["long"])
+
+    
+
 
 if (__name__ == "__main__"):
         app.debug = True
