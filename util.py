@@ -20,8 +20,10 @@ def numTo(lat, long):
 
 def nameTo(add):
     #add = "1600+Amphitheatre+Parkway,+Mountain+View,+CA"
+    add = add.replace(" ","+")
+    print add
     key = "AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
-    query = "https://www.maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s" % (add, key)
+    query = "https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s" % (add, key)
 
 
     #%s&go=&qs=n&sk=&sc=8-13&first=%s' % (quoted_query, page)
@@ -32,8 +34,8 @@ def nameTo(add):
     lat = result["results"][0]["geometry"]["location"]["lat"]
     lng = result["results"][0]["geometry"]["location"]["lng"]
     dict = {}
-    dict.lat = lat
-    dict.long = lng
+    dict["lat"] = lat
+    dict["long"] = lng
     #return jsonify(result)
     return dict
     
@@ -50,8 +52,11 @@ if __name__=='__main__':
     lat = 40.714224
     long = -73.961452
     key = "AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
-    basic = """https://maps.googleapis.com/maps/api/geocode/json?latlng="""+str(lat)+","+str(long)+"""&key=""" + key
-    
+    #basic = """https://maps.googleapis.com/maps/api/geocode/json?latlng="""+str(lat)+","+str(long)+"""&key=""" + key
+
+    add = "1600+Amphitheatre+Parkway,+Mountain+View,+CA"
+    basic = """https://maps.googleapis.com/maps/api/geocode/json?address="""+add+"""&key="""+key
+    print basic
     request = urllib2.urlopen(basic)
     result = request.read()
     result = json.loads(result)
