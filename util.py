@@ -12,9 +12,16 @@ def numTo(lat, long):
     request = urllib2.urlopen(basic)
     result = request.read()
     result = json.loads(result)
-    
-    return jsonify(result)
-    #return result
+
+    lat = result["results"][0]["geometry"]["location"]["lat"]
+    lng = result["results"][0]["geometry"]["location"]["lng"]
+    full_address = result["results"][0]["formatted_address"]
+    dict = {}
+    dict["lat"] = lat
+    dict["long"] = lng
+    dict["add"] = full_address
+    #return jsonify(result)
+    return dict
 
 
 
@@ -33,9 +40,11 @@ def nameTo(add):
     result = json.loads(result)
     lat = result["results"][0]["geometry"]["location"]["lat"]
     lng = result["results"][0]["geometry"]["location"]["lng"]
+    full_address = result["results"][0]["formatted_address"]
     dict = {}
     dict["lat"] = lat
     dict["long"] = lng
+    dict["add"] = full_address
     #return jsonify(result)
     return dict
     
