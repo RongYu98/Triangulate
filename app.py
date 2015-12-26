@@ -23,10 +23,6 @@ def main():
     
     #return render_template("Artist.html",images=final,artist=artist,Tracks = Tracks)
 
-@app.route("/index")
-def index():
-    return render_template("index.html")
-
 @app.route("/name")
 def nameToNumbers():
     add = "1600+Amphitheatre+Parkway,+Mountain+View,+CA"
@@ -43,11 +39,19 @@ def test():
         return render_template("test.html")
     else:
         #request.method == "GET":
-        query = request.form["place"]
-        print(request.form["place"])
-        stuff = util.nameTo(query)
-        return render_template("test.html", loc = query, lat = stuff["lat"], lng = stuff["long"])
-
+	print "HKHDASH"
+        if request.form["submit"] == "Find By Name":
+	    print"HIIII"
+            query = request.form["place"]
+            print(request.form["place"])
+            stuff = util.nameTo(query)
+            return render_template("test.html", loc = query, lat = stuff["lat"], lng = stuff["long"], add = stuff["add"])
+        else:
+            lat = request.form["lat"]
+            long = request.form["long"]
+            print (long + "----" + lat)
+            stuff = util.numTo( lat, long )
+            return render_template("test.html", loc = "Latitude: "+str(lat)+" Longitude: "+str(long), lat = stuff["lat"], lng = stuff["long"], add = stuff["add"] )
     
 
 
