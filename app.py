@@ -53,7 +53,16 @@ def test():
             stuff = util.numTo( lat, long )
             return render_template("test.html", loc = "Latitude: "+str(lat)+" Longitude: "+str(long), lat = stuff["lat"], lng = stuff["long"], add = stuff["add"] )
     
-
+@app.route("/tests")
+def nearHere():
+    add = "1600+Amphitheatre+Parkway,+Mountain+View,+CA"
+    key = "AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
+    query = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?address=%s&radius=500&types=food&name=cruise&key=%s" % (add, key)
+    request = urllib2.urlopen(query)
+    result = request.read()
+    result = json.loads(result)
+    print result
+    return jsonify(result)
 
 if (__name__ == "__main__"):
         app.debug = True
