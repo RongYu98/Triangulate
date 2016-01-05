@@ -55,15 +55,22 @@ def randStuff():
     #full_address = result["results"][0]["formatted_address"]
     pass
 
-def nearHere(add):
+def nearHere(longi, lat):
     key = "AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
-    query = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?address=%s&radius=500&types=food&name=cruise&key=%s" % (add, key)
+    #query = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?address=%s&radius=500&types=food&name=cruise&key=%s" % (add, key)
+    query = "https://maps.googleapis.com/maps/api/place/radarsearch/json?location="+longi+","+lat+"&radius=5000&types=food|cafe&keyword=vegetarian&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
+    #get the place_id and finds from that thing the top five place?
     request = urllib2.urlopen(query)
     result = request.read()
     result = json.loads(result)
     print result
     return jsonify(result)
 
+def byPlaceID(ID):
+    query = "https://maps.googleapis.com/maps/api/place/radarsearch/json?location="+longi+","+lat+"&radius=5000&types=food|cafe&keyword=vegetarian&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
+    https://developers.google.com/places/place-id
+
+    
     
 if __name__=='__main__':
     lat = 40.714224
@@ -83,3 +90,4 @@ if __name__=='__main__':
     #return jsonify(result["results"][0])
 
 
+nearHere(48.859294,2.347589)

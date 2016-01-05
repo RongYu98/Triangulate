@@ -41,7 +41,6 @@ def test():
         #request.method == "GET":
 	print "HKHDASH"
         if request.form["submit"] == "Find By Name":
-	    print"HIIII"
             query = request.form["place"]
             print(request.form["place"])
             stuff = util.nameTo(query)
@@ -57,7 +56,9 @@ def test():
 def nearHere():
     add = "1600+Amphitheatre+Parkway,+Mountain+View,+CA"
     key = "AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
-    query = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?address=%s&radius=500&types=food&name=cruise&key=%s" % (add, key)
+    #query = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?address=%s&radius=500&types=food&name=cruise&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0" % (add)
+    #query = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&radius=500&types=food&name=cruise&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
+    query = "https://maps.googleapis.com/maps/api/place/radarsearch/json?location=48.859294,2.347589&radius=5000&types=food|cafe&keyword=vegetarian&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
     request = urllib2.urlopen(query)
     result = request.read()
     result = json.loads(result)
