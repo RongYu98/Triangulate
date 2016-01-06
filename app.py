@@ -100,6 +100,8 @@ def register():
         else:
             return render_template('register.html',err="That username is taken")
 
+#@app.route('/findmid',methods=[GET, POST])
+
 
     
 
