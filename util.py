@@ -55,6 +55,20 @@ def randStuff():
     #full_address = result["results"][0]["formatted_address"]
     pass
 
+
+def getInfo(query):
+    #this will return a dict of 'loc = "Latitude: "+str(lat)+" Longitude: "+str(long), lat = stuff["lat"], lng = stuff["long"], add = stuff["add"]'
+    request = urllib2.urlopen(query)
+    result = request.read()
+    result = json.loads(result)
+    lat = result["results"][0]["geometry"]["location"]["lat"]
+    lng = result["results"][0]["geometry"]["location"]["lng"]
+    full_address = result["results"][0]["formatted_address"]
+    dict = {}
+    dict["lat"] = lat
+    dict["long"] = lng
+    dict["add"] = full_address
+    return dict
 def nearHere(longi, lat):
     key = "AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
     #query = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?address=%s&radius=500&types=food&name=cruise&key=%s" % (add, key)
@@ -63,15 +77,43 @@ def nearHere(longi, lat):
     request = urllib2.urlopen(query)
     result = request.read()
     result = json.loads(result)
-    print result
-    return jsonify(result)
-
+    i = 0
+    l = []
+    while (i<5):
+        placeID = result["results"][i]["place_id"]
+        i= i+1
+        l.append(placeID)
+    i = 0
+    while (i<5):
+        l[i] = byPlaceID(l[i])
+        i = i+1
+    #print result
+    print l
+    return l
 def byPlaceID(ID):
-    query = "https://maps.googleapis.com/maps/api/place/radarsearch/json?location="+longi+","+lat+"&radius=5000&types=food|cafe&keyword=vegetarian&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
-    https://developers.google.com/places/place-id
+     #placeID = result["results"][0]["place_id"]
+    query = "https://maps.googleapis.com/maps/api/place/details/json?placeid="+ID+"&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
+    #https://developers.google.com/places/place-id
+    #placeID = result["results"][0]["place_id"]
 
+    request = urllib2.urlopen(query)
+    result = request.read()
+    result = json.loads(result)
     
-    
+    lat = result["results"][0]["geometry"]["location"]["lat"]
+    lng = result["results"][0]["geometry"]["location"]["lng"]
+    full_address = result["results"][0]["formatted_address"]
+    dict = {}
+    dict["lat"] = lat
+    dict["long"] = lng
+    dict["add"] = full_address
+    return dict
+
+    return result
+
+
+
+
 if __name__=='__main__':
     lat = 40.714224
     long = -73.961452
@@ -90,4 +132,4 @@ if __name__=='__main__':
     #return jsonify(result["results"][0])
 
 
-nearHere(48.859294,2.347589)
+#nearHere("48.859294","2.347589")

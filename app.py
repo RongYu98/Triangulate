@@ -56,14 +56,32 @@ def test():
 def nearHere():
     add = "1600+Amphitheatre+Parkway,+Mountain+View,+CA"
     key = "AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
-    #query = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?address=%s&radius=500&types=food&name=cruise&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0" % (add)
-    #query = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&radius=500&types=food&name=cruise&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
+    
     query = "https://maps.googleapis.com/maps/api/place/radarsearch/json?location=48.859294,2.347589&radius=5000&types=food|cafe&keyword=vegetarian&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
     request = urllib2.urlopen(query)
     result = request.read()
     result = json.loads(result)
+
+    i = 0
+    l = []
     print result
+    while (i<5):
+        placeID = result["results"][i]["place_id"]
+        i= i+1
+        l.append(placeID)
+
+    print result
+    print l
+
+    #return jsonify(l)
+    query = "https://maps.googleapis.com/maps/api/place/details/json?placeid="+l[0]+"&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
+    request = urllib2.urlopen(query)
+    result = request.read()
+    result = json.loads(result)
+    print result["result"]["formatted_address"]
+    #this one is different from the others
     return jsonify(result)
+    #return jsonify(util.byPlaceID(l[0]))
 
 if (__name__ == "__main__"):
         app.debug = True
