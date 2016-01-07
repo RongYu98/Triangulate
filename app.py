@@ -51,7 +51,15 @@ def test():
             print (long + "----" + lat)
             stuff = util.numTo( lat, long )
             return render_template("test.html", loc = "Latitude: "+str(lat)+" Longitude: "+str(long), lat = stuff["lat"], lng = stuff["long"], add = stuff["add"] )
-    
+
+
+
+@app.route("/testss")
+def NearHere():
+    l = util.nearHere("48.859294","2.347589")
+    print l
+    return "Gu"
+
 @app.route("/tests")
 def nearHere():
     add = "1600+Amphitheatre+Parkway,+Mountain+View,+CA"
@@ -64,21 +72,29 @@ def nearHere():
 
     i = 0
     l = []
-    print result
+    #print result
     while (i<5):
         placeID = result["results"][i]["place_id"]
         i= i+1
         l.append(placeID)
 
-    print result
-    print l
+    #print result
+    #print l
 
     #return jsonify(l)
-    query = "https://maps.googleapis.com/maps/api/place/details/json?placeid="+l[0]+"&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
-    request = urllib2.urlopen(query)
-    result = request.read()
-    result = json.loads(result)
-    print result["result"]["formatted_address"]
+    i = 0
+    dic = {}
+    while (i<5):
+        query = "https://maps.googleapis.com/maps/api/place/details/json?placeid="+l[i]+"&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
+        request = urllib2.urlopen(query)
+        result = request.read()
+        result = json.loads(result)
+        #return result["result"]["formatted_address"]
+        #print result["result"]["formatted_address"]
+        dic[i] = result["result"]["formatted_address"]
+        i+=1
+
+    return jsonify(dic)
     #this one is different from the others
     return jsonify(result)
     #return jsonify(util.byPlaceID(l[0]))

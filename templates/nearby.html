@@ -1,0 +1,10 @@
+<form method = "POST">
+  Search for a location by lattitude and longitude: 
+  <input type = "text" name = "long" placeholder="Longitude"></input>
+  <input type = "text" name = "lat" placeholder="Latitude"></input>
+  <input type="submit" name="submit" value="Find By Numbers"></input>
+</form>
+
+{% for key, value in result.iteritems() %}
+Location: {{key}} {{value}}
+{% endfor %}
