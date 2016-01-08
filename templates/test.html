@@ -21,13 +21,20 @@ Location Searched: {{loc | safe}}
 <br>
 {% if loc %}
 Address Found: {{add}}
-{% endif %}
-
 <br>
+{% endif %}
 {% if lat %}
 Lat: {{lat}}
+<br>
 {% endif %}
-
 {% if lng %}
 Lat: {{lng}}
+<br>
+{% endif %}
+
+{% if result %}
+{% for key, value in result.iteritems() %}
+Location: {{key+1}}. {{value}}
+<br>
+{% endfor %}
 {% endif %}
