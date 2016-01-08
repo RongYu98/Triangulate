@@ -37,11 +37,14 @@ def test():
         return render_template("test.html")
     else:
         #request.method == "GET":
-	print "HKHDASH"
         if request.form["submit"] == "Find By Name":
             query = request.form["place"]
             print(request.form["place"])
             stuff = util.nameTo(query)
+            result = util.nearHere(stuff["long"], stuff["lat"])
+            print stuff["long"]
+            print stuff["lat"]
+            return result
             return render_template("test.html", loc = query, lat = stuff["lat"], lng = stuff["long"], add = stuff["add"])
         else:
             lat = request.form["lat"]
@@ -54,13 +57,14 @@ def test():
 
 @app.route("/testss")
 def NearHere():
-    l = util.nearHere("48.859294","2.347589")
-    i = 0
-    dict = {}
-    while (i<5):
-        dict[i] = l[i]
-        i+=1
-    return render_template("test.html", result = dict)
+    dic = util.nearHere("48.859294","2.347589")
+    #l = util.nearHere("48.859294","2.347589")
+    #i = 0
+    #dict = {}
+    #while (i<5):
+        #dict[i] = l[i]
+        #i+=1
+    return render_template("test.html", result = dic)
 
 @app.route("/tests")
 def nearHere():

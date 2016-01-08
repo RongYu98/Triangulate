@@ -71,6 +71,8 @@ def getInfo(query): #currently not in used
     return dict
 
 def nearHere(longi, lat):
+    longi = str(longi)
+    lat = str(lat)
     #query = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?address=%s&radius=500&types=food&name=cruise&key=%s" % (add, key)
     query = "https://maps.googleapis.com/maps/api/place/radarsearch/json?location="+longi+","+lat+"&radius=5000&types=food|cafe&keyword=vegetarian&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
     request = urllib2.urlopen(query)
@@ -79,18 +81,19 @@ def nearHere(longi, lat):
     i = 0
     l = []
     while (i<5):
+        return jsonify(result)
         placeID = result["results"][i]["place_id"]
         i= i+1
         l.append(placeID)
     i = 0
     dic={}
     while (i<5):
-        l[i] = byPlaceID(l[i])
+        dic[i] = byPlaceID(l[i])
         #make this a dic instead
         print l[i]
         i = i+1
         #print result
-    return l
+    return dic
 def byPlaceID(ID):
     query = "https://maps.googleapis.com/maps/api/place/details/json?placeid="+ID+"&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
     #https://developers.google.com/places/place-id
