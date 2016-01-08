@@ -20,8 +20,6 @@ def main():
     print result["results"][0]
     return jsonify(result["results"][0])
     #return jsonify(result)
-    
-    #return render_template("Artist.html",images=final,artist=artist,Tracks = Tracks)
 
 @app.route("/name")
 def nameToNumbers():
@@ -57,8 +55,12 @@ def test():
 @app.route("/testss")
 def NearHere():
     l = util.nearHere("48.859294","2.347589")
-    print l
-    return "Gu"
+    i = 0
+    dict = {}
+    while (i<5):
+        dict[i] = l[i]
+        i+=1
+    return render_template("test.html", result = dict)
 
 @app.route("/tests")
 def nearHere():
