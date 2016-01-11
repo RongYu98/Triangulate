@@ -39,19 +39,24 @@ def test():
         #request.method == "GET":
         if request.form["submit"] == "Find By Name":
             query = request.form["place"]
-            print(request.form["place"])
+            #print(request.form["place"])
             stuff = util.nameTo(query)
-            result = util.nearHere(stuff["long"], stuff["lat"])
-            print stuff["long"]
-            print stuff["lat"]
-            return result
-            return render_template("test.html", loc = query, lat = stuff["lat"], lng = stuff["long"], add = stuff["add"])
+            print ("lat: "+str(stuff["lat"])+"  long: "+str(stuff["long"]))
+            dictio = {}
+            dictio = util.nearHere(stuff["long"], stuff["lat"])
+            #print stuff["long"]
+            #print stuff["lat"]
+            #return result
+            return render_template("test.html", loc = query, lat = stuff["lat"], lng = stuff["long"], add = stuff["add"], result = dictio)
         else:
             lat = request.form["lat"]
             long = request.form["long"]
             print (long + "----" + lat)
             stuff = util.numTo( lat, long )
             return render_template("test.html", loc = "Latitude: "+str(lat)+" Longitude: "+str(long), lat = stuff["lat"], lng = stuff["long"], add = stuff["add"] )
+        #neither work?
+        #https://maps.googleapis.com/maps/api/place/radarsearch/json?location=-73.7815126,42.3903615&radius=5000&types=food|cafe&keyword=vegetarian&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0
+        #https://maps.googleapis.com/maps/api/place/radarsearch/json?location=42.3903615,-73.7815126&radius=5000&types=food|cafe&keyword=vegetarian&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0
 
 
 
