@@ -59,14 +59,28 @@ Possible Algorithm:
      ELSE
         lon=mod(lon1-asin(sin(tc)*sin(d)/cos(lat))+pi,2*pi)-pi
      ENDIF
-
-def eightPoints( coord ):
-""" 
-
 """
+def eightPoints( coord, dist):
+    pi = math.pi
+    pointArray = []
+    lat1 = coord[0]
+    lon1 = coord[1]
+    directions = [0, pi/4, pi/2, 3*pi/4, pi, 5*pi/4, 3*pi/2, 7*pi/4]
+    for i in range(8):
+        tc = directions[i]
+        lat = asin(sin(lat1)*cos(dist)+cos(lat1)*sin(dist)*cos(tc))
+        lon = 0
+        if (cos(lat) == 0):
+            lon = lon1
+        else:
+            lon = (lon1-asin(sin(tc)*sin(dist)/cos(lat))+pi)%(2*pi)-pi
+        pointArray[i] = (lat, lon)
+    return pointArray
+            
+
 In Progress:
 
-def minDist( coords, unit ):
+def findCurrPoint( coords, locations, unit ):
     currentPoint = geoMin( coords )
     minDist = 0
     for coord in coords:
@@ -78,12 +92,18 @@ def minDist( coords, unit ):
         if tmpDist < minDist:
             minDist = tmpDist
             currentPoint = coords[x]
+    return currentPoint
+
+
+def minDistPoint(currentPoint):
     testDist = 0;
     if unit == "imperial":
         testDist = 6225
     if unit == "metric":
-        testDist = 10018        
-"""
+        testDist = 10018
+    pointArray = eightPoints(currentPoint, testDist)
+    
+    
 
 pointa = (40.769750, -73.740648)
 pointb = (40.7180139,-74.0160826)
