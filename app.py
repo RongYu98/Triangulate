@@ -27,8 +27,6 @@ def main():
     print result["results"][0]
     return jsonify(result["results"][0])
     #return jsonify(result)
-    
-    #return render_template("Artist.html",images=final,artist=artist,Tracks = Tracks)
 
 @app.route("/name")
 def nameToNumbers():
@@ -48,7 +46,6 @@ def test():
         #request.method == "GET":
 	print "HKHDASH"
         if request.form["submit"] == "Find By Name":
-	    print"HIIII"
             query = request.form["place"]
             print(request.form["place"])
             stuff = util.nameTo(query)
@@ -101,7 +98,7 @@ def register():
             return redirect(url_for('home'))
         else:
             return render_template('register.html',err="That username is taken!")
-
+        
 @app.route('/home', methods=["GET","POST"])
 def home():
     if verify():
@@ -113,6 +110,55 @@ def home():
         return render_template('home.html', user=user, posts=util.gettitles())
     return redirect(url_for("login"))
 
+@app.route("/testss")
+def NearHere():
+    l = util.nearHere("48.859294","2.347589")
+    i = 0
+    dict = {}
+    while (i<5):
+        dict[i] = l[i]
+        i+=1
+    return render_template("test.html", result = dict)
+
+@app.route("/tests")
+def nearHere():
+    add = "1600+Amphitheatre+Parkway,+Mountain+View,+CA"
+    key = "AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
+    
+    query = "https://maps.googleapis.com/maps/api/place/radarsearch/json?location=48.859294,2.347589&radius=5000&types=food|cafe&keyword=vegetarian&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
+    request = urllib2.urlopen(query)
+    result = request.read()
+    result = json.loads(result)
+
+    i = 0
+    l = []
+    #print result
+    while (i<5):
+        placeID = result["results"][i]["place_id"]
+        i= i+1
+        l.append(placeID)
+
+    #print result
+    #print l
+>>>>>>> 22973ec0a416f40c2d48602258548c46a427620a
+
+    #return jsonify(l)
+    i = 0
+    dic = {}
+    while (i<5):
+        query = "https://maps.googleapis.com/maps/api/place/details/json?placeid="+l[i]+"&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
+        request = urllib2.urlopen(query)
+        result = request.read()
+        result = json.loads(result)
+        #return result["result"]["formatted_address"]
+        #print result["result"]["formatted_address"]
+        dic[i] = result["result"]["formatted_address"]
+        i+=1
+
+    return jsonify(dic)
+    #this one is different from the others
+    return jsonify(result)
+    #return jsonify(util.byPlaceID(l[0]))
 
 @app.route('/logout')
 def logout():
