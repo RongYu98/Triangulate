@@ -44,6 +44,8 @@ def test():
             print ("lat: "+str(stuff["lat"])+"  long: "+str(stuff["long"]))
             dictio = {}
             dictio = util.nearHere(stuff["long"], stuff["lat"])
+            if dictio["ERROR"] == "NO":
+                dictio.pop("ERROR", None)
             #print stuff["long"]
             #print stuff["lat"]
             #return result
@@ -53,23 +55,26 @@ def test():
             long = request.form["long"]
             print (long + "----" + lat)
             stuff = util.numTo( lat, long )
-            return render_template("test.html", loc = "Latitude: "+str(lat)+" Longitude: "+str(long), lat = stuff["lat"], lng = stuff["long"], add = stuff["add"] )
-        #neither work?
-        #https://maps.googleapis.com/maps/api/place/radarsearch/json?location=-73.7815126,42.3903615&radius=5000&types=food|cafe&keyword=vegetarian&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0
-        #https://maps.googleapis.com/maps/api/place/radarsearch/json?location=42.3903615,-73.7815126&radius=5000&types=food|cafe&keyword=vegetarian&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0
+            dictio = util.nearHere(long, lat)
+            return render_template("test.html", loc = "Latitude: "+str(lat)+" Longitude: "+str(long), lat = stuff["lat"], lng = stuff["long"], add = stuff["add"], result = dictio )
 
-
-
-@app.route("/testss")
-def NearHere():
-    dic = util.nearHere("48.859294","2.347589")
-    #l = util.nearHere("48.859294","2.347589")
-    #i = 0
-    #dict = {}
-    #while (i<5):
-        #dict[i] = l[i]
-        #i+=1
-    return render_template("test.html", result = dic)
+@app.route("/convert",methods=["GET","POST"])
+def convert():
+    if request.method == "GET":
+        return render_template("test.html")
+    else:
+        #request.method == "GET":
+        if request.form["submit"] == "Find By Name":
+            query = request.form["place"]
+            stuff = util.nameTo(query)
+            print ("lat: "+str(stuff["lat"])+"  long: "+str(stuff["long"]))
+            return render_template("test.html", loc = query, lat = stuff["lat"], lng = stuff["long"], add = stuff["add"])
+        else:
+            lat = request.form["lat"]
+            long = request.form["long"]
+            print (long + "----" + lat)
+            stuff = util.numTo( lat, long )
+            return render_template("test.html", loc = "Latitude: "+str(lat)+" Longitude: "+str(long), lat = stuff["lat"], lng = stuff["long"], add = stuff["add"])
 
 @app.route("/tests")
 def nearHere():

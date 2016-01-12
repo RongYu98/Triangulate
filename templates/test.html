@@ -28,13 +28,15 @@ Lat: {{lat}}
 <br>
 {% endif %}
 {% if lng %}
-Lat: {{lng}}
+Lng: {{lng}}
 <br>
 {% endif %}
 
 {% if result %}
 {% for key, value in result.iteritems() %}
+{% if {{key}}!="ERROR" }}
 Location: {{key+1}}. {{value}}
+{{% endif}}
 <br>
 {% endfor %}
 {% endif %}

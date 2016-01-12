@@ -70,19 +70,28 @@ def getInfo(query): #currently not in used
     return dict
 
 def nearHere(longi, lat):
+    #note, some places WILL NOT WORK
     longi = str(longi)
     lat = str(lat)
     #query = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?address=%s&radius=500&types=food&name=cruise&key=%s" % (add, key)
     query = "https://maps.googleapis.com/maps/api/place/radarsearch/json?location="+lat+","+longi+"&radius=5000&types=food|cafe&keyword=vegetarian&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
     print query
+    print "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
+    print
+    print
     print "Lat: "+str(lat)
     print "long: "+str(longi)
     #print "Reached here----------"
     request = urllib2.urlopen(query)
     result = request.read()
-    #print "Request read"
     result = json.loads(result)
-    print result
+    #print result
+    dic={}
+    if result["status"]!="OK":
+        dic["ERROR"] = result["status"]
+        return dic
+    else:
+        dic["ERROR"] = "NO"
     i = 0
     l = []
     while (i<5):
@@ -93,16 +102,14 @@ def nearHere(longi, lat):
         i= i+1
         l.append(placeID)
     i = 0
-    dic={}
     while (i<5):
         dic[i] = byPlaceID(l[i])
         #make this a dic instead
-        print l[i]
+        #print l[i]
         i = i+1
         #print result
 
-    print "DONE!!!!!!"
-    print dic
+    #print dic
     return dic
 def byPlaceID(ID):
     query = "https://maps.googleapis.com/maps/api/place/details/json?placeid="+ID+"&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
@@ -140,3 +147,4 @@ if __name__=='__main__':
     #print result["results"][0]["address_components"]
     #return jsonify(result["results"][0])
     nearHere(-73.961452,40.714224)
+    #nearHere(-73.7815126,42.3903615) 
