@@ -5,13 +5,6 @@ import util
 
 app = Flask(__name__)
 
-def verify():
-    if 'log' in session:
-        return session['log'] == 'verified'
-    else:
-        session['log'] == 'unverified'
-        return False
-    
 @app.route("/",methods=["GET","POST"])
 def main():
     lat = 40.714224
@@ -87,7 +80,6 @@ def nearHere():
 
     #print result
     #print l
->>>>>>> 22973ec0a416f40c2d48602258548c46a427620a
 
     #return jsonify(l)
     i = 0
