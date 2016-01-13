@@ -62,46 +62,6 @@ def test():
             dictio = util.nearHere(long, lat)
             return render_template("test.html", loc = "Latitude: "+str(lat)+" Longitude: "+str(long), lat = stuff["lat"], lng = stuff["long"], add = stuff["add"], result = dictio )
 
-@app.route('/login', methods=["GET","POST"])
-def login():
-    if request.method == "GET":
-        return render_template('login.html')
-    if verify():
-        return redirect(url_for('home'))
-        if request.method == "POST":
-            form = request.form
-            button = form['button']
-            if button == "Register":
-                return redirect(url_for("register"))
-            else:
-                uname = form['username']
-                session['username'] = uname
-                pword = form['password']
-                if util.authenticate(uname, pword):
-                    session['log'] = 'verified'
-                    session['username'] = uname
-                    return redirect(url_for('home'))
-                else:
-                    return render_template('login.html',error="Incorrect Username or Password")
-
-@app.route('/register',methods=["GET","POST"])
-def register():
-    if request.method == "GET":
-        return render_template("register.html")
-    if request.method == "POST":
-        form = request.form
-        uname = form['username']
-        pword = form['password']
-        button = form['button']
-        if button == 'Login':
-            return redirect(url_for('login'))
-        if util.register(uname,pword):
-            session['log'] = 'verified'
-            session['username'] = uname
-            return redirect(url_for('home'))
-        else:
-            return render_template('register.html',err="That username is taken")
-
 @app.route("/tests")
 def nearHere():
     add = "1600+Amphitheatre+Parkway,+Mountain+View,+CA"
@@ -150,7 +110,6 @@ def verify():
         session['log'] = 'unverified'
         return False
 
-@app.route('/', methods=["GET","POST"])
 @app.route('/login', methods=["GET","POST"])
 def login():
     if request.method == "GET":
