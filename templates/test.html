@@ -13,7 +13,9 @@
 </form>
 
 
-
+{% if error %}
+Error: {{error}}
+{% endif %}
 {% if loc %}
 Location Searched: {{loc | safe}}
 {% endif %}

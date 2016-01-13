@@ -41,6 +41,8 @@ def test():
             query = request.form["place"]
             #print(request.form["place"])
             stuff = util.nameTo(query)
+            if (stuff["ERROR"] != "NO"):
+                return render_template("test.html", error = stuff["ERROR"])
             print ("lat: "+str(stuff["lat"])+"  long: "+str(stuff["long"]))
             dictio = {}
             dictio = util.nearHere(stuff["long"], stuff["lat"])
@@ -59,7 +61,11 @@ def test():
             long = request.form["long"]
             print (long + "----" + lat)
             stuff = util.numTo( lat, long )
+            if (stuff["ERROR"] != "NO"):
+                return render_template("test.html", error = stuff["ERROR"])
             dictio = util.nearHere(long, lat)
+            if dictio["ERROR"] == "NO":
+                dictio = {}
             return render_template("test.html", loc = "Latitude: "+str(lat)+" Longitude: "+str(long), lat = stuff["lat"], lng = stuff["long"], add = stuff["add"], result = dictio )
 
 @app.route("/tests")
@@ -68,10 +74,17 @@ def nearHere():
     key = "AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
     
     query = "https://maps.googleapis.com/maps/api/place/radarsearch/json?location=48.859294,2.347589&radius=5000&types=food|cafe&keyword=vegetarian&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
+    #query = "https://maps.googleapis.com/maps/api/place/radarsearch/json?location=48859294,2347589&radius=5000&types=food|cafe&keyword=vegetarian&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
     request = urllib2.urlopen(query)
     result = request.read()
     result = json.loads(result)
 
+    ##
+    return result["status"]
+    return jsonify(results)
+
+    ###################################
+    
     i = 0
     l = []
     #print result

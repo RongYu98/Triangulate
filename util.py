@@ -12,13 +12,17 @@ def numTo(lat, long):
     result = request.read()
     result = json.loads(result)
 
-    lat = result["results"][0]["geometry"]["location"]["lat"]
-    lng = result["results"][0]["geometry"]["location"]["lng"]
-    full_address = result["results"][0]["formatted_address"]
     dict = {}
-    dict["lat"] = lat
-    dict["long"] = lng
-    dict["add"] = full_address
+    if (result["status"] != "OK"):
+        dict["ERROR"] = result["status"]
+    else:
+        lat = result["results"][0]["geometry"]["location"]["lat"]
+        lng = result["results"][0]["geometry"]["location"]["lng"]
+        full_address = result["results"][0]["formatted_address"]
+        dict["lat"] = lat
+        dict["long"] = lng
+        dict["add"] = full_address
+        dict["ERROR"] = "NO"
     #return jsonify(result)
     return dict
 
@@ -37,13 +41,18 @@ def nameTo(add):
     request = urllib2.urlopen(query)
     result = request.read()
     result = json.loads(result)
-    lat = result["results"][0]["geometry"]["location"]["lat"]
-    lng = result["results"][0]["geometry"]["location"]["lng"]
-    full_address = result["results"][0]["formatted_address"]
+
     dict = {}
-    dict["lat"] = lat
-    dict["long"] = lng
-    dict["add"] = full_address
+    if (result["status"] != "OK"):
+        dict["ERROR"] = result["status"]
+    else:
+        lat = result["results"][0]["geometry"]["location"]["lat"]
+        lng = result["results"][0]["geometry"]["location"]["lng"]
+        full_address = result["results"][0]["formatted_address"]
+        dict["lat"] = lat
+        dict["long"] = lng
+        dict["add"] = full_address
+        dict["ERROR"] = "NO"
     #return jsonify(result)
     return dict
     
@@ -55,7 +64,7 @@ def randStuff():
     pass
 
 
-def getInfo(query): #currently not in used
+def getInfo(query): #currently not in used #unfixed
     #this will return a dict of 'loc = "Latitude: "+str(lat)+" Longitude: "+str(long), lat = stuff["lat"], lng = stuff["long"], add = stuff["add"]'
     request = urllib2.urlopen(query)
     result = request.read()
@@ -77,7 +86,6 @@ def nearHere(longi, lat):
     query = "https://maps.googleapis.com/maps/api/place/radarsearch/json?location="+lat+","+longi+"&radius=5000&types=food|cafe&keyword=vegetarian&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
     print query
     print "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
-    print
     print
     print "Lat: "+str(lat)
     print "long: "+str(longi)
