@@ -78,8 +78,6 @@ def eightPoints( coord, dist):
     return pointArray
             
 
-In Progress:
-
 def findCurrPoint( coords, locations, unit ):
     currentPoint = geoMin( coords )
     minDist = 0
