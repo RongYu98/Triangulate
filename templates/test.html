@@ -34,9 +34,7 @@ Lng: {{lng}}
 
 {% if result %}
 {% for key, value in result.iteritems() %}
-{% if {{key}}!="ERROR" }}
 Location: {{key+1}}. {{value}}
-{{% endif}}
 <br>
 {% endfor %}
 {% endif %}

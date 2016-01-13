@@ -46,6 +46,10 @@ def test():
             dictio = util.nearHere(stuff["long"], stuff["lat"])
             if dictio["ERROR"] == "NO":
                 dictio.pop("ERROR", None)
+            else:
+                string = dictio["ERROR"]
+                dictio.pop("ERROR", None)
+                dictio[-1] = string
             #print stuff["long"]
             #print stuff["lat"]
             #return result
