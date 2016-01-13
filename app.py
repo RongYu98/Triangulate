@@ -37,28 +37,70 @@ def test():
         return render_template("test.html")
     else:
         #request.method == "GET":
-	print "HKHDASH"
         if request.form["submit"] == "Find By Name":
             query = request.form["place"]
-            print(request.form["place"])
+            #print(request.form["place"])
             stuff = util.nameTo(query)
-            return render_template("test.html", loc = query, lat = stuff["lat"], lng = stuff["long"], add = stuff["add"])
+            print ("lat: "+str(stuff["lat"])+"  long: "+str(stuff["long"]))
+            dictio = {}
+            dictio = util.nearHere(stuff["long"], stuff["lat"])
+            if dictio["ERROR"] == "NO":
+                dictio.pop("ERROR", None)
+            else:
+                string = dictio["ERROR"]
+                dictio.pop("ERROR", None)
+                dictio[-1] = string
+            #print stuff["long"]
+            #print stuff["lat"]
+            #return result
+            return render_template("test.html", loc = query, lat = stuff["lat"], lng = stuff["long"], add = stuff["add"], result = dictio)
         else:
             lat = request.form["lat"]
             long = request.form["long"]
             print (long + "----" + lat)
             stuff = util.numTo( lat, long )
-            return render_template("test.html", loc = "Latitude: "+str(lat)+" Longitude: "+str(long), lat = stuff["lat"], lng = stuff["long"], add = stuff["add"] )
+            dictio = util.nearHere(long, lat)
+            return render_template("test.html", loc = "Latitude: "+str(lat)+" Longitude: "+str(long), lat = stuff["lat"], lng = stuff["long"], add = stuff["add"], result = dictio )
 
-@app.route("/testss")
-def NearHere():
-    l = util.nearHere("48.859294","2.347589")
-    i = 0
-    dict = {}
-    while (i<5):
-        dict[i] = l[i]
-        i+=1
-    return render_template("test.html", result = dict)
+@app.route('/login', methods=["GET","POST"])
+def login():
+    if request.method == "GET":
+        return render_template('login.html')
+    if verify():
+        return redirect(url_for('home'))
+        if request.method == "POST":
+            form = request.form
+            button = form['button']
+            if button == "Register":
+                return redirect(url_for("register"))
+            else:
+                uname = form['username']
+                session['username'] = uname
+                pword = form['password']
+                if util.authenticate(uname, pword):
+                    session['log'] = 'verified'
+                    session['username'] = uname
+                    return redirect(url_for('home'))
+                else:
+                    return render_template('login.html',error="Incorrect Username or Password")
+
+@app.route('/register',methods=["GET","POST"])
+def register():
+    if request.method == "GET":
+        return render_template("register.html")
+    if request.method == "POST":
+        form = request.form
+        uname = form['username']
+        pword = form['password']
+        button = form['button']
+        if button == 'Login':
+            return redirect(url_for('login'))
+        if util.register(uname,pword):
+            session['log'] = 'verified'
+            session['username'] = uname
+            return redirect(url_for('home'))
+        else:
+            return render_template('register.html',err="That username is taken")
 
 @app.route("/tests")
 def nearHere():

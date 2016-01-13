@@ -1,14 +1,13 @@
 from flask import Flask, render_template, request, jsonify
 import urllib2
 import json
-import util
 
 def numTo(lat, long):
     #lat = 40.714224
     #long = -73.961452
     key = "AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
     basic = """https://maps.googleapis.com/maps/api/geocode/json?latlng="""+str(lat)+","+str(long)+"""&key=""" + key
-    
+    print basic
     request = urllib2.urlopen(basic)
     result = request.read()
     result = json.loads(result)
@@ -71,26 +70,47 @@ def getInfo(query): #currently not in used
     return dict
 
 def nearHere(longi, lat):
+    #note, some places WILL NOT WORK
+    longi = str(longi)
+    lat = str(lat)
     #query = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?address=%s&radius=500&types=food&name=cruise&key=%s" % (add, key)
-    query = "https://maps.googleapis.com/maps/api/place/radarsearch/json?location="+longi+","+lat+"&radius=5000&types=food|cafe&keyword=vegetarian&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
+    query = "https://maps.googleapis.com/maps/api/place/radarsearch/json?location="+lat+","+longi+"&radius=5000&types=food|cafe&keyword=vegetarian&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
+    print query
+    print "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
+    print
+    print
+    print "Lat: "+str(lat)
+    print "long: "+str(longi)
+    #print "Reached here----------"
     request = urllib2.urlopen(query)
     result = request.read()
     result = json.loads(result)
+    #print result
+    dic={}
+    if result["status"]!="OK":
+        dic["ERROR"] = result["status"]
+        return dic
+    else:
+        dic["ERROR"] = "NO"
     i = 0
     l = []
     while (i<5):
+        #print jsonify(result)
+        #return jsonify(result)
         placeID = result["results"][i]["place_id"]
+        print placeID
         i= i+1
         l.append(placeID)
     i = 0
-    dic={}
     while (i<5):
-        l[i] = byPlaceID(l[i])
+        dic[i] = byPlaceID(l[i])
         #make this a dic instead
-        print l[i]
+        #print l[i]
         i = i+1
         #print result
-    return l
+
+    #print dic
+    return dic
 def byPlaceID(ID):
     query = "https://maps.googleapis.com/maps/api/place/details/json?placeid="+ID+"&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
     #https://developers.google.com/places/place-id
@@ -98,9 +118,8 @@ def byPlaceID(ID):
     request = urllib2.urlopen(query)
     result = request.read()
     result = json.loads(result)
-    
-    #lat = result["results"][0]["geometry"]["location"]["lat"]
-    #lng = result["results"][0]["geometry"]["location"]["lng"]
+    #print result
+
     full_address = result["result"]["formatted_address"]
     #dict = {}
     #dict["add"] = full_address
@@ -164,16 +183,18 @@ def gettitles():
 if __name__=='__main__':
     lat = 40.714224
     long = -73.961452
-    key = "AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
+    #key = "AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
     #basic = """https://maps.googleapis.com/maps/api/geocode/json?latlng="""+str(lat)+","+str(long)+"""&key=""" + key
 
-    add = "1600+Amphitheatre+Parkway,+Mountain+View,+CA"
-    basic = """https://maps.googleapis.com/maps/api/geocode/json?address="""+add+"""&key="""+key
-    print basic
-    request = urllib2.urlopen(basic)
-    result = request.read()
-    result = json.loads(result)
+    #add = "1600+Amphitheatre+Parkway,+Mountain+View,+CA"
+    #basic = """https://maps.googleapis.com/maps/api/geocode/json?address="""+add+"""&key="""+key
+    #print basic
+    #request = urllib2.urlopen(basic)
+    #result = request.read()
+    #result = json.loads(result)
     #lat = result["results"][0]["geometry"]["location"]["lat"]
     #lng = result["results"][0]["geometry"]["location"]["lng"]
-    print result["results"][0]["address_components"]
+    #print result["results"][0]["address_components"]
     #return jsonify(result["results"][0])
+    nearHere(-73.961452,40.714224)
+    #nearHere(-73.7815126,42.3903615) 
