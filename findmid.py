@@ -1,24 +1,24 @@
 from flask import Flask, render_template, request, jsonify
 import urllib2
 import json
-import math
+from math import cos, sin, sqrt, atan2, pi, radians, asin
 
 def geoMin( coords ):
     totx = 0
     toty = 0
     for coord in coords:
-        latdegs = coord[0] * math.pi / 180
-        longdegs = coord[1] * math.pi / 180
-        x = math.cos(latdegs) * math.cos(longdegs)
-        y = math.cos(latdegs) * math.sin(longdegs)
-        z = math.sin(latdegs)
+        latdegs = coord[0] * pi / 180
+        longdegs = coord[1] * pi / 180
+        x = cos(latdegs) * cos(longdegs)
+        y = cos(latdegs) * sin(longdegs)
+        z = sin(latdegs)
         totx += x
         toty += y
     avgx = totx/len(coords)
     avgy = toty/len(coords)
-    lon = math.atan(avgy, avgx)
-    hyp = math.sqrt(x * x + y * y)
-    lat = math.atan2(z, hyp)
+    lon = atan2(avgy, avgx)
+    hyp = sqrt(x * x + y * y)
+    lat = atan2(z, hyp)
     finalcoord = lat, lon
     return finalcoord
 
@@ -40,16 +40,16 @@ def twoPointDist(a, b, unit):
     print distance
     return float(distance)
     """
-    aLat = math.radians(a[0])
-    aLong = math.radians(a[1])
-    bLat = math.radians(b[0])
-    bLong = math.radians(b[1])
+    aLat = radians(a[0])
+    aLong = radians(a[1])
+    bLat = radians(b[0])
+    bLong = radians(b[1])
     latDiff = abs(aLat - bLat)
     lonDiff = abs(aLong - bLong)
-    var1 = math.sin(latDiff / 2) ** 2 + math.cos(aLat) * math.cos(bLat) * math.sin(lonDiff / 2) ** 2
-    var2 = 2 * math.atan2(math.sqrt(var1), math.sqrt(1 - var1))
+    var1 = sin(latDiff / 2) ** 2 + cos(aLat) * cos(bLat) * sin(lonDiff / 2) ** 2
+    var2 = 2 * atan2(sqrt(var1), sqrt(1 - var1))
     d = radEarth * var2
-    print d
+    return d
 
 """
 Possible Algorithm:
@@ -61,8 +61,8 @@ Possible Algorithm:
      ENDIF
 """
 def eightPoints( coord, dist):
-    pi = math.pi
-    pointArray = []
+    default = (0, 0)
+    pointArray = [default, default, default, default, default, default, default, default]
     lat1 = coord[0]
     lon1 = coord[1]
     directions = [0, pi/4, pi/2, 3*pi/4, pi, 5*pi/4, 3*pi/2, 7*pi/4]
@@ -78,7 +78,7 @@ def eightPoints( coord, dist):
     return pointArray
             
 
-def findCurrPoint( coords, locations, unit ):
+def findCurrPoint( coords, unit ):
     currentPoint = geoMin( coords )
     minDist = 0
     for coord in coords:
@@ -93,16 +93,29 @@ def findCurrPoint( coords, locations, unit ):
     return currentPoint
 
 
-def minDistPoint(currentPoint):
+def minDistPoint(currentPoint, unit):
     testDist = 0;
     if unit == "imperial":
         testDist = 6225
     if unit == "metric":
         testDist = 10018
-    pointArray = eightPoints(currentPoint, testDist)
-    
+    midEightPoints = currentPoint
+    while (testDist > 0.00000002):
+        pointArray = eightPoints(midEightPoints, testDist)
+        newCurrPoint = findCurrPoint( pointArray, unit )
+        if (newCurrPoint == currentPoint):
+            testDist = testDist/2
+        else:
+            currentPoint = newCurrPoint
+    return currentPoint
+        
     
 
 pointa = (40.769750, -73.740648)
-pointb = (40.7180139,-74.0160826)
-twoPointDist(pointa, pointb, "imperial")
+pointb = (40.7180139, -74.0160826)
+pointc = (40.6927460, -72.9782137)
+coords = [pointa, pointb, pointc]
+
+print findCurrPoint( coords, "imperial" )
+#print minDistPoint(curr, "imperial")
+#twoPointDist(pointa, pointb, "imperial")
