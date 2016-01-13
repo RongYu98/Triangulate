@@ -124,12 +124,12 @@ def add(filename, username, content, NUMID):
 def register(uname,pword):
     m=md5.new()
     m.update(pword)
-    f = open("tables/users.txt", 'r')
+    f = open("users/users.txt", 'r')
     for line in f.readlines():
         if uname == line.split(',')[0]:
             return False
     f.close()
-    f = open("tables/users.txt",'a')
+    f = open("users/users.txt",'a')
     f.write("%(user)s,%(phash)s\n"%({"user":uname,"phash":m.hexdigest()}))
     f.close()
     return True
@@ -137,7 +137,7 @@ def register(uname,pword):
 def authenticate(uname, pword):
     m = md5.new()
     m.update(pword)
-    f = open("tables/users.txt",'r')
+    f = open("users/users.txt",'r')
     for line in f.readlines():
         if uname == line.split(',')[0] and m.hexdigest() == line.split(',')[1].strip():
             f.close()
