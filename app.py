@@ -185,6 +185,41 @@ def logout():
     session['action'] = "Logged Out!"
     return redirect(url_for('login'))
 
+#*******~POST FUNCTIONS~*******#
+@app.route('/make',methods=["GET","POST"])
+def make():
+    if request.method =="POST":
+        form = request.form
+        title=form['Title']
+        content=form['content']
+        button=form['button']
+        user=session['username']
+        if button=='Back':
+            user=session['username']
+            return render_template('home.html', user=user, posts=util.gettitles())
+        util.add("%s"%title,user,content,0)
+        return redirect('/view/%s'%title)
+    if verify():
+        user = session['username']
+        return render_template('make.html',user=user)
+    return redirect(url_for("login"))
+
+@app.route('/view')
+@app.route('/view/<title>',methods=["GET","POST"])
+def view(title=""):
+    if title == "":
+        return redirect('/home')
+    user=""
+    if verify():
+        user=session['username']
+    if request.method == "POST":
+        form = request.form
+        content = form['content']
+        util.add("%s"%title,user, content,1000)
+    posts = util.getposts(title)
+    return render_template('view.html',user=user,title=title,posts=posts)
+
+#*******~MAIN~*******#
 
 if (__name__ == "__main__"):
         app.debug = True
