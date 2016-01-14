@@ -3,7 +3,13 @@ import urllib2
 import json
 from math import cos, sin, sqrt, atan2, pi, radians, asin
 
-def geoMin( coords ):
+coords = []
+
+def setLocations(inputLocations):
+    global coords
+    coords = inputLocations
+
+def geoMin():
     totx = 0
     toty = 0
     for coord in coords:
@@ -78,18 +84,18 @@ def eightPoints( coord, dist):
     return pointArray
             
 
-def findCurrPoint( coords, unit ):
-    currentPoint = geoMin( coords )
+def findCurrPoint( testLocations, unit ):
+    currentPoint = geoMin()
     minDist = 0
-    for coord in coords:
+    for coord in testLocations:
         minDist += twoPointDist(currentPoint, coord, unit )
-    for x in range(len(coords)):
+    for x in range(len(testLocations)):
         tmpDist = 0
-        for y in range(x+1, len(coords)):
-            tmpDist += twoPointDist(coords[x], coords[y], unit )
+        for y in range(len(coords)):
+            tmpDist += twoPointDist(testLocations[x], coords[y], unit )
         if tmpDist < minDist:
             minDist = tmpDist
-            currentPoint = coords[x]
+            currentPoint = testLocations[x]
     return currentPoint
 
 
@@ -99,9 +105,9 @@ def minDistPoint(currentPoint, unit):
         testDist = 6225
     if unit == "metric":
         testDist = 10018
-    midEightPoints = currentPoint
+    #midEightPoints = currentPoint
     while (testDist > 0.00000002):
-        pointArray = eightPoints(midEightPoints, testDist)
+        pointArray = eightPoints(currentPoint, testDist)
         newCurrPoint = findCurrPoint( pointArray, unit )
         if (newCurrPoint == currentPoint):
             testDist = testDist/2
@@ -116,6 +122,8 @@ pointb = (40.7180139, -74.0160826)
 pointc = (40.6927460, -72.9782137)
 coords = [pointa, pointb, pointc]
 
-print findCurrPoint( coords, "imperial" )
+
+curr = findCurrPoint( coords, "imperial" )
+print eightPoints(curr, 6225 )
 #print minDistPoint(curr, "imperial")
 #twoPointDist(pointa, pointb, "imperial")
