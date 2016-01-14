@@ -65,7 +65,11 @@ def test():
                 return render_template("test.html", error = stuff["ERROR"])
             dictio = util.nearHere(long, lat)
             if dictio["ERROR"] == "NO":
-                dictio = {}
+                dictio.pop("ERROR", None)
+            else:
+                err = dictio["ERROR"]
+                dictio.pop("ERROR", None)
+                dictio[-1] = err
             return render_template("test.html", loc = "Latitude: "+str(lat)+" Longitude: "+str(long), lat = stuff["lat"], lng = stuff["long"], add = stuff["add"], result = dictio )
 
 @app.route("/tests")

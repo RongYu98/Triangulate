@@ -105,10 +105,13 @@ def nearHere(longi, lat):
     while (i<5):
         #print jsonify(result)
         #return jsonify(result)
-        placeID = result["results"][i]["place_id"]
-        print placeID
+        try:
+            placeID = result["results"][i]["place_id"]
+            print placeID
+            l.append(placeID)
+        except:
+            print "No more results"
         i= i+1
-        l.append(placeID)
     i = 0
     while (i<5):
         dic[i] = byPlaceID(l[i])
