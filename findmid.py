@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import urllib2
 import json
-from math import cos, sin, sqrt, atan2, pi, radians, asin
+from math import cos, sin, sqrt, atan2, pi, radians, degrees, asin
 
 coords = []
 
@@ -66,11 +66,11 @@ Possible Algorithm:
         lon=mod(lon1-asin(sin(tc)*sin(d)/cos(lat))+pi,2*pi)-pi
      ENDIF
 """
-def eightPoints( coord, dist):
+def eightPoints(coord, dist):
     default = (0, 0)
     pointArray = [default, default, default, default, default, default, default, default]
-    lat1 = coord[0]
-    lon1 = coord[1]
+    lat1 = radians(coord[0])
+    lon1 = radians(coord[1])
     directions = [0, pi/4, pi/2, 3*pi/4, pi, 5*pi/4, 3*pi/2, 7*pi/4]
     for i in range(8):
         tc = directions[i]
@@ -80,7 +80,7 @@ def eightPoints( coord, dist):
             lon = lon1
         else:
             lon = (lon1-asin(sin(tc)*sin(dist)/cos(lat))+pi)%(2*pi)-pi
-        pointArray[i] = (lat, lon)
+        pointArray[i] = (degrees(lat), degrees(lon))
     return pointArray
             
 
@@ -102,17 +102,20 @@ def findCurrPoint( testLocations, unit ):
 def minDistPoint(currentPoint, unit):
     testDist = 0;
     if unit == "imperial":
-        testDist = 6225
+        testDist = 6225.0
     if unit == "metric":
-        testDist = 10018
+        testDist = 10018.0
     #midEightPoints = currentPoint
     while (testDist > 0.00000002):
+        print currentPoint
         pointArray = eightPoints(currentPoint, testDist)
         newCurrPoint = findCurrPoint( pointArray, unit )
         if (newCurrPoint == currentPoint):
-            testDist = testDist/2
+            testDist = testDist/2.0
+            print "case 1"
         else:
             currentPoint = newCurrPoint
+            print "case 2"
     return currentPoint
         
     
@@ -124,6 +127,6 @@ coords = [pointa, pointb, pointc]
 
 
 curr = findCurrPoint( coords, "imperial" )
-print eightPoints(curr, 6225 )
-#print minDistPoint(curr, "imperial")
+#print eightPoints(curr, 6225 )
+print minDistPoint(curr, "imperial")
 #twoPointDist(pointa, pointb, "imperial")
