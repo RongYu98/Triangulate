@@ -63,6 +63,8 @@ def test():
             stuff = util.numTo( lat, long )
             if (stuff["ERROR"] != "NO"):
                 return render_template("test.html", error = stuff["ERROR"])
+            return render_template("map.html", lati = stuff["lat"], longi = stuff["long"])
+        #################################
             dictio = util.nearHere(long, lat)
             if dictio["ERROR"] == "NO":
                 dictio.pop("ERROR", None)
