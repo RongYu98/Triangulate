@@ -114,7 +114,10 @@ def nearHere(longi, lat):
         i= i+1
     i = 0
     while (i<5):
-        dic[i] = byPlaceID(l[i])
+        try:
+            dic[i] = byPlaceID(l[i])
+        except:
+            print "No more results"
         #make this a dic instead
         #print l[i]
         i = i+1
