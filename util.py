@@ -83,7 +83,8 @@ def nearHere(longi, lat):
     longi = str(longi)
     lat = str(lat)
     #query = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?address=%s&radius=500&types=food&name=cruise&key=%s" % (add, key)
-    query = "https://maps.googleapis.com/maps/api/place/radarsearch/json?location="+lat+","+longi+"&radius=5000&types=food|cafe&keyword=vegetarian&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
+    #query = "https://maps.googleapis.com/maps/api/place/radarsearch/json?location="+lat+","+longi+"&radius=5000&types=food|cafe&keyword=vegetarian&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
+    query = "https://maps.googleapis.com/maps/api/place/radarsearch/json?location="+lat+","+longi+"&radius=500&types=food|cafe&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
     print query
     print "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
     print
