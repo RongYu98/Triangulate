@@ -84,21 +84,28 @@ def eightPoints(coord, dist):
     return pointArray
             
 
-def findCurrPoint( testLocations, unit ):
-    currentPoint = geoMin()
-    minDist = 0
-    for coord in testLocations:
-        minDist += twoPointDist(currentPoint, coord, unit )
+def findCurrPoint( testLocations, unit, currentPoint, minDist ):
     for x in range(len(testLocations)):
         tmpDist = 0
         for y in range(len(coords)):
             tmpDist += twoPointDist(testLocations[x], coords[y], unit )
+        """print "tmpDist: "
+        print tmpDist
+        print "\nminDist: "
+        print minDist"""
         if tmpDist < minDist:
             minDist = tmpDist
             currentPoint = testLocations[x]
     return currentPoint
 
-
+def findTheMiddle(unit):
+    currentPoint = geoMin()
+    minDist = 0
+    for coord in testLocations:
+        minDist += twoPointDist(currentPoint, coord, unit )
+    currentPoint = findCurrPoint(coords, unit, currentPoint, minDist)
+    
+    
 def minDistPoint(currentPoint, unit):
     testDist = 0;
     if unit == "imperial":
@@ -109,7 +116,7 @@ def minDistPoint(currentPoint, unit):
     while (testDist > 0.00000002):
         print currentPoint
         pointArray = eightPoints(currentPoint, testDist)
-        newCurrPoint = findCurrPoint( pointArray, unit )
+        newCurrPoint = findCurrPoint( pointArray, unit, currentPoint )
         if (newCurrPoint == currentPoint):
             testDist = testDist/2.0
             print "case 1"
@@ -126,7 +133,11 @@ pointc = (40.6927460, -72.9782137)
 coords = [pointa, pointb, pointc]
 
 
-curr = findCurrPoint( coords, "imperial" )
+curr = findCurrPoint( coords, "imperial", geoMin() )
 #print eightPoints(curr, 6225 )
 print minDistPoint(curr, "imperial")
 #twoPointDist(pointa, pointb, "imperial")
+
+    minDist = 0
+    for coord in testLocations:
+        minDist += twoPointDist(currentPoint, coord, unit )
