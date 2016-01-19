@@ -52,11 +52,9 @@ def test():
                 string = dictio["ERROR"]
                 dictio.pop("ERROR", None)
                 dictio[-1] = string
-            #print stuff["long"]
-            #print stuff["lat"]
             #return result
             return render_template("test.html", loc = query, lat = stuff["lat"], lng = stuff["long"], add = stuff["add"], result = dictio)
-        else:
+        elif request.form["submit"] == "Find On Map":
             lat = request.form["lat"]
             long = request.form["long"]
             print (long + "----" + lat)
@@ -64,7 +62,13 @@ def test():
             if (stuff["ERROR"] != "NO"):
                 return render_template("test.html", error = stuff["ERROR"])
             return render_template("map.html", lati = stuff["lat"], longi = stuff["long"])
-        #################################
+        else:
+            lat = request.form["lat"]
+            long = request.form["long"]
+            print (long + "----" + lat)
+            stuff = util.numTo( lat, long )
+            if (stuff["ERROR"] != "NO"):
+                return render_template("test.html", error = stuff["ERROR"])
             dictio = util.nearHere(long, lat)
             if dictio["ERROR"] == "NO":
                 dictio.pop("ERROR", None)
