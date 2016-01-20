@@ -78,6 +78,61 @@ def test():
                 dictio[-1] = err
             return render_template("test.html", loc = "Latitude: "+str(lat)+" Longitude: "+str(long), lat = stuff["lat"], lng = stuff["long"], add = stuff["add"], result = dictio )
 
+
+@app.route("/maps",methods=["GET","POST"]) #will currently only apply to the second box
+def maps():
+    if request.method == "GET":
+        return render_template("test.html")
+    else:
+        if request.form["submit"] == "Find By Name":
+            query = request.form["place"]
+            stuff = util.nameTo(query)
+            if (stuff["ERROR"] != "NO"):
+                return render_template("test.html", error = stuff["ERROR"])
+            print ("lat: "+str(stuff["lat"])+"  long: "+str(stuff["long"]))
+            dictio = {}
+            dictio = util.nearHere(stuff["long"], stuff["lat"])
+            if dictio["ERROR"] == "NO":
+                dictio.pop("ERROR", None)
+            else:
+                string = dictio["ERROR"]
+                dictio.pop("ERROR", None)
+                dictio[-1] = string
+            return render_template("test.html", loc = query, lat = stuff["lat"], lng = stuff["long"], add = stuff["add"], result = dictio)
+        ####################################
+        elif request.form["submit"] == "Find On Map":
+            lat = request.form["lat"]
+            long = request.form["long"]
+            print (long + "----" + lat)
+            stuff = util.numTo( lat, long )
+            if (stuff["ERROR"] != "NO"):
+                return render_template("test.html", error = stuff["ERROR"])
+            base[0] = "NAME"####
+            base[1] = stuff["lat"]
+            base[2] = stuff["long"]
+            i = 0
+
+            place == DICT#################3 ?
+            return render_template("map.html", lati = stuff["lat"], longi = stuff["long"])
+        else:
+            lat = request.form["lat"]
+            long = request.form["long"]
+            print (long + "----" + lat)
+            stuff = util.numTo( lat, long )
+            if (stuff["ERROR"] != "NO"):
+                return render_template("test.html", error = stuff["ERROR"])
+            dictio = util.nearHere(long, lat)
+            if dictio["ERROR"] == "NO":
+                dictio.pop("ERROR", None)
+            else:
+                err = dictio["ERROR"]
+                dictio.pop("ERROR", None)
+                dictio[-1] = err
+            return render_template("test.html", loc = "Latitude: "+str(lat)+" Longitude: "+str(long), lat = stuff["lat"], lng = stuff["long"], add = stuff["add"], result = dictio )
+    
+    return render_template("maps.htm", places = stuffs, base = itself)
+    #my_list should be a [][], the [] should be numbered, a seperate one for each place. [][0] == name, [][1] == lat, [][2] == long, base should be about itself.
+        
 @app.route("/tests")
 def nearHere():
     add = "1600+Amphitheatre+Parkway,+Mountain+View,+CA"
