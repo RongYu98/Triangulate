@@ -1,10 +1,44 @@
-<h1>Make Your Own Story!</h1>
-<form method="POST">
-	Title:<input type="text" name="Title" placeholder="Title" size="35"></input>
-	<br>
-	<p>Content:</p>
-	<textarea name="content" rows = "10" cols = "80"></textarea>
-	<br>
-	<input type="submit" name="button" value="Submit"></input>
-	<input type="submit" name="button" value="Back"></input>
-</form>
+{% extends "base_on.html" %}
+
+{% block title %}Triangulate - {{user}}{% endblock %}
+
+{% block contents %}
+
+<!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('../static/img/about-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Triangulate</h1>
+                        <hr class="small">
+                        <span class="subheading">{{user}}-Make Post</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <center>
+                <p><b>Lets post and meet up!!, {{user}}</b></p>
+                <p>
+                  <form method="POST">
+		Title:<input type="text" name="Title" placeholder="Title" size="35"></input>
+		<br>
+		<p>Content:</p>
+		<textarea name="content" rows = "10" cols = "80"></textarea>
+		<br>
+		<input type="submit" name="button" value="Submit"></input>
+		<input type="submit" name="button" value="Back"></input>
+		</form>
+                </p>
+                </center>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
