@@ -12,7 +12,7 @@
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
                         <h1>{{title}}</h1>
-                        <h2 class="subheading">Started by - {{post["user"]}}</h2>
+                        <h2 class="subheading">Started by - {% post["user"] %}</h2>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
 
                 <tr>
                  <td class="content">{{post["content"]}}</td>
-                 <span class="meta"><td class="author">By - {{post["user"]}}</td></span>
+                 <td class="author" class="meta">By - {{post["user"]}}</td>
                 </tr>
 
               {% endif %}
