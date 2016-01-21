@@ -1,10 +1,40 @@
-<div class="welcome">Welcome {{user}}!</div>
-<p>Add to a story below, or make your own!</p>
-<a href="/make">Make a Story</a>
-<a href="/logout" align="right">Logout</a><br>
-<table>
-{% for title in posts %}
-<tr><td><a href="/view/{{title}}">{{title}}</a></td></tr>
-{% endfor %}
-</table>
-</center>
+{% extends "base_on.html" %}
+
+{% block title %}Triangulate - {{user}}{% endblock %}
+
+{% block contents %}
+
+<!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('../static/img/about-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Triangulate</h1>
+                        <hr class="small">
+                        <span class="subheading">{{user}}-Home</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <center>
+                <p><b>Welcome back, {{user}}</b></p>
+                <p>
+                  <table>
+                    {% for title in posts %}
+                    <tr><td><a href="/view/{{title}}">{{title}}</a></td></tr>
+                    {% endfor %}
+                  </table>
+                </p>
+                </center>
+            </div>
+        </div>
+    </div>
+
+
