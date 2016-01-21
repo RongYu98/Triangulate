@@ -132,13 +132,12 @@ def minDistPoint(currentPoint, unit, minDist):
     return currentPoint
         
     
-
-pointa = (40.769750, -73.740648)
-pointb = (40.7180139, -74.0160826)
-pointc = (40.6927460, -72.9782137)
-
-coords = [pointa, pointb, pointc]
-print geoMin()
-#print eightPoints(curr, 6225 )
-print findTheMiddle("imperial")
-#twoPointDist(pointa, pointb, "imperial")
+if __name__=='__main__':
+    pointa = (40.769750, -73.740648)
+    pointb = (40.7180139, -74.0160826)
+    pointc = (40.6927460, -72.9782137)
+    coords = [pointa, pointb, pointc]
+    print geoMin()
+    #print eightPoints(curr, 6225 )
+    print findTheMiddle("imperial")
+    #twoPointDist(pointa, pointb, "imperial")
