@@ -222,6 +222,9 @@ def view(title=""):
         form = request.form
         content = form['content']
         util.add("%s"%title,user, content,1000)
+        if button=='Back':
+            user=session['username']
+            return render_template('home.html', user=user, posts=util.gettitles())
     posts = util.getposts(title)
     return render_template('view.html',user=user,title=title,posts=posts)
 
