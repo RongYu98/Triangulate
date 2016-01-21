@@ -1,12 +1,44 @@
-<form class="loginform" method = "POST">
-<br>
-{%if error %}
-<h3>{{error}}</h3>
-<br>
-{% endif %}
-<div>Login</div><br>
-Username:<input type = "text" name = "username" placeholder="Username"></input><br><br>
-Password:<input type = "password" name = "password" placeholder="Password"></input><br><br>
-<input type="submit" name="button" value="Login"></input>
-<input type="submit" name="button" value="Register"></input>
-</form>
+{% extends "base_off.html" %}
+
+{% block title %}Triangulate - Login{% endblock %}
+
+{% block contents %}
+<!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('img/about-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>About Me</h1>
+                        <hr class="small">
+                        <span class="subheading">This is what I do.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>Ayyyy login stuff~</p>
+                <p>
+                  <form class="loginform" method = "POST">
+                  <br>
+                  {%if error %}
+                  <h3>{{error}}</h3>
+                  <br>
+                  {% endif %}
+                  <div>Login</div><br>
+                    Username:<input type = "text" name = "username" placeholder="Username"></input><br><br>
+                    Password:<input type = "password" name = "password" placeholder="Password"></input><br><br>
+                    <input type="submit" name="button" value="Login"></input>
+                  <input type="submit" name="button" value="Register"></input>
+                   </form>
+                </p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
