@@ -4,16 +4,15 @@
 
 {% block contents %}
 
-<!-- Page Header -->
+    <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('../static/img/about-bg.jpg')">
+    <header class="intro-header" style="background-image: url('../static/img/post-bg.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="page-heading">
-                        <h1>Triangulate</h1>
-                        <hr class="small">
-                        <span class="subheading">{{user}}-Home</span>
+                    <div class="post-heading">
+                        <h1>{{title}}</h1>
+                        <h2 class="subheading">{{post["content"] | safe}}</h2>
                     </div>
                 </div>
             </div>
@@ -46,7 +45,7 @@
 
                 <tr>
                  <td class="content">{{post["content"]}}</td>
-                 <td class="author">By - {{post["user"]}}</td>
+                 <span class="meta"><td class="author">By - {{post["user"]}}</td></span>
                 </tr>
 
               {% endif %}
