@@ -221,6 +221,8 @@ def view(title=""):
     if request.method == "POST":
         form = request.form
         content = form['content']
+        button=form['button']
+        user=session['username']
         util.add("%s"%title,user, content,1000)
         if button=='Back':
             user=session['username']
