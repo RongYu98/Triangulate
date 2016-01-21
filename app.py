@@ -107,13 +107,22 @@ def maps():
             stuff = util.numTo( lat, long )
             if (stuff["ERROR"] != "NO"):
                 return render_template("test.html", error = stuff["ERROR"])
-            base[0] = "NAME"####
-            base[1] = stuff["lat"]
-            base[2] = stuff["long"]
+            base = [stuff["add"], stuff["lat"], stuff["long"]]
+        
+            dictio = util.nearHere(long, lat)
+            if dictio["ERROR"] != "NO":
+                dictio.pop("ERROR", None)
+            else:
+                return render_template("maps.html", base = base)
             i = 0
-
-            place == DICT#################3 ?
-            return render_template("map.html", lati = stuff["lat"], longi = stuff["long"])
+            #places[]
+            while (i<5):
+                #place[]
+                #place[0] = 
+                #places[i] = 
+                i+=1
+            #place == DICT#################3 ?
+            return render_template("map.html",  base = base)
         else:
             lat = request.form["lat"]
             long = request.form["long"]
