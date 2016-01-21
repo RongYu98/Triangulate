@@ -26,11 +26,12 @@
                 <center>
                 <p><b>Welcome back, {{user}}</b></p>
                 <p>
-                  <table>
                     {% for title in posts %}
-                    <tr><td><a href="/view/{{title}}">{{title}}</a></td></tr>
+                    <div class="post-preview">
+                    <a href="/view/{{title}}"><h2 class="post-title">{{title}}</h2></a>
+                    </div>
+                    <hr>
                     {% endfor %}
-                  </table>
                 </p>
                 </center>
             </div>
