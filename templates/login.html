@@ -32,8 +32,20 @@
                   <br>
                   {% endif %}
                   <div>Login</div><br>
-                    Username:<input type = "text" name = "username" placeholder="Username"></input><br><br>
-                    Password:<input type = "password" name = "password" placeholder="Password"></input><br><br>
+                    Username:
+                        <div class="row control-group">
+                         <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <input type = "text" name = "username" placeholder="Username"></input><br><br>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        </div>
+                    Password:
+                        <div class="row control-group">
+                         <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <input type = "password" name = "password" placeholder="Password"></input><br><br>
+                               <p class="help-block text-danger"></p>
+                        </div>
+                        </div>
                     <input type="submit" name="button" value="Login"></input>
                   <input type="submit" name="button" value="Register"></input>
                    </form>
