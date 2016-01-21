@@ -1,4 +1,3 @@
-
 <form method = "POST">
   Search for a location by name: 
   <input type = "text" name = "place" placeholder="Stuyvesant"></input>
@@ -6,14 +5,17 @@
 </form>
 
 <form method = "POST">
-  Search for a location by lattitude and longitude: 
-  <input type = "text" name = "long" placeholder="Longitude"></input>
+  Search for a location by lattitude and longitude:
   <input type = "text" name = "lat" placeholder="Latitude"></input>
+  <input type = "text" name = "long" placeholder="Longitude"></input>
   <input type="submit" name="submit" value="Find By Numbers"></input>
+  <input type="submit" name="submit" value="Find On Map"></input>
 </form>
 
 
-
+{% if error %}
+Error: {{error}}
+{% endif %}
 {% if loc %}
 Location Searched: {{loc | safe}}
 {% endif %}
@@ -21,13 +23,20 @@ Location Searched: {{loc | safe}}
 <br>
 {% if loc %}
 Address Found: {{add}}
-{% endif %}
-
 <br>
+{% endif %}
 {% if lat %}
 Lat: {{lat}}
+<br>
+{% endif %}
+{% if lng %}
+Lng: {{lng}}
+<br>
 {% endif %}
 
-{% if lng %}
-Lat: {{lng}}
+{% if result %}
+{% for key, value in result.iteritems() %}
+Location: {{key+1}}. {{value}}
+<br>
+{% endfor %}
 {% endif %}

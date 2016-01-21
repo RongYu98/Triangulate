@@ -1,0 +1,30 @@
+<div>{{title}}</div>
+{% set x_x = 0 %}
+{% for post in posts %}
+{% if post["NUMID"] == 0 %}
+{% if x_x != 1 %}
+  <table>
+    <tr>
+      <td>
+  {{post["content"] | safe }}
+      </td>
+    </tr>
+  </table>
+{% endif %}
+{% set x_x = 1 %}
+{% endif %}
+<table>
+{% if post["NUMID"] > 0 %}
+
+<tr>
+  <td class="content">{{post["content"]}}</td>
+  <td class="author">By - {{post["user"]}}</td>
+</tr>
+
+{% endif %}
+{% endfor %}
+</table><br>
+  <form method="POST" class="add">
+    <textarea name="content" style="width:90%;" rows="4"></textarea><input type="submit" value="Submit">
+  </form>
+  <input type="submit" name="button" value="Back"></input>

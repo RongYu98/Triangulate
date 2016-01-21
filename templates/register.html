@@ -1,0 +1,11 @@
+<form class="loginform" method="POST"> <!-- if the stylebody is added and login changed to loginform, login is redundant-->
+{% if err %}
+<err>{{err}}</err>
+{% endif %}
+<br>
+<div>Register</div><br>
+Username:<input type = "text" name = "username" placeholder="Username"></input><br><br>
+Password:<input type = "password" name = "password" placeholder="Password"></input><br><br>
+<input type="submit" name="button" value="Login"></input>
+<input type="submit" name="button" value="Register"></input>
+</form>

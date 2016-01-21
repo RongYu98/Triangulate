@@ -1,0 +1,10 @@
+<div class="welcome">Welcome {{user}}!</div>
+<p>Add to a story below, or make your own!</p>
+<a href="/make">Make a Story</a>
+<a href="/logout" align="right">Logout</a><br>
+<table>
+{% for title in posts %}
+<tr><td><a href="/view/{{title}}">{{title}}</a></td></tr>
+{% endfor %}
+</table>
+</center>
