@@ -173,16 +173,6 @@ def register():
         else:
             return render_template('register.html',err="That username is taken!")
 
-@app.route('/home', methods=["GET","POST"])
-def home():
-    if verify():
-        user=''
-        if 'username' in session:
-            user=session['username']
-        else:
-            user = session['username'] = "Null"
-        return render_template('home.html', user=user, posts=util.gettitles())
-    return redirect(url_for("login"))
 
 @app.route('/logout')
 def logout():
