@@ -173,15 +173,17 @@ def register():
         else:
             return render_template('register.html',err="That username is taken!")
 
-
-@app.route('/logout')
-def logout():
+@app.route('/home', methods=["GET","POST"])
+def home():
     if verify():
-        session['log'] = "unverified"
-    session['action'] = "Logged Out!"
-    return redirect(url_for('login'))
+        user=''
+        if 'username' in session:
+            user=session['username']
+        else:
+            user = session['username'] = "Null"
+        return render_template('home.html', user=user, posts=util.gettitles())
+    return redirect(url_for("login"))
 
-#*******~POST FUNCTIONS~*******#
 @app.route('/make',methods=["GET","POST"])
 def make():
     if request.method =="POST":
@@ -214,6 +216,14 @@ def view(title=""):
         util.add("%s"%title,user, content,1000)
     posts = util.getposts(title)
     return render_template('view.html',user=user,title=title,posts=posts)
+
+
+@app.route('/logout')
+def logout():
+    if verify():
+        session['log'] = "unverified"
+    session['action'] = "Logged Out!"
+    return redirect(url_for('login'))
 
 #*******~MAIN~*******#
 
