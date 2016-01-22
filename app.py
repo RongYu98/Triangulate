@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 import urllib2
 import json
-import util
+import util, findmid
 
 app = Flask(__name__)
 
@@ -62,6 +62,24 @@ def test():
             if (stuff["ERROR"] != "NO"):
                 return render_template("test.html", error = stuff["ERROR"])
             return render_template("map.html", lati = stuff["lat"], longi = stuff["long"])
+        elif request.form["submit"] == "Find Midpoint":
+            lat1 = request.form["lat1"]
+            long1 = request.form["long1"]
+            lat2 = request.form["lat2"]
+            long2 = request.form["long2"]
+            lat3 = request.form["lat3"]
+            long3 = request.form["long3"]
+            
+            pointa = "("+lat1+", "+long1+")"
+            pointb = "("+lat2+", "+long2+")"
+            pointc = "("+lat3+", "+long3+")"
+            
+            coordinates = [pointa, pointb, pointc]
+            findmid.setLocations(coordinates)
+            
+            midpoint = findmid.geoMin()
+            return render_template("mid.html",mid=midpoint)
+            
         else:
             lat = request.form["lat"]
             long = request.form["long"]
