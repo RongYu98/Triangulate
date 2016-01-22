@@ -78,6 +78,7 @@ def test():
             findmid.setLocations(coordinates)
             
             midpoint = findmid.geoMin()
+            midd = util.numTo(midpoint
             return render_template("mid.html",mid=midpoint)
             
         else:
