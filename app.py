@@ -64,16 +64,16 @@ def test():
             return render_template("map.html", lati = stuff["lat"], longi = stuff["long"])
             
         elif request.form["submit"] == "Find Midpoint":
-            lat1 = request.form["lat1"]
-            long1 = request.form["long1"]
-            lat2 = request.form["lat2"]
-            long2 = request.form["long2"]
-            lat3 = request.form["lat3"]
-            long3 = request.form["long3"]
+            lat1 = int(request.form["lat1"])
+            long1 = int(request.form["long1"])
+            lat2 = int(request.form["lat2"])
+            long2 = int(request.form["long2"])
+            lat3 = int(request.form["lat3"])
+            long3 = int(request.form["long3"])
             
-            pointa = "("+lat1+", "+long1+")"
-            pointb = "("+lat2+", "+long2+")"
-            pointc = "("+lat3+", "+long3+")"
+            pointa = (lat1, long1)
+            pointb = (lat2, long2)
+            pointc = (lat3, long3)
             
             coordinates = [pointa, pointb, pointc]
             findmid.setLocations(coordinates)
