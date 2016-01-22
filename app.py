@@ -80,7 +80,7 @@ def test():
             
             midpoint = findmid.geoMin()
 
-            return render_template("mid.html",mid=midpoint)
+            return render_template("test.html",midpoint=midpoint)
             
         else:
             lat = request.form["lat"]
