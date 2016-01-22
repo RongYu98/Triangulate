@@ -40,3 +40,17 @@ Location: {{key+1}}. {{value}}
 <br>
 {% endfor %}
 {% endif %}
+
+<form method = "POST">
+  Search for a location by lattitude and longitude:
+  <input type = "text" name = "lat1" placeholder="Latitude 1"></input>
+  <input type = "text" name = "long1" placeholder="Longitude 1"></input>
+  <br><br>
+  <input type = "text" name = "lat2" placeholder="Latitude 2"></input>
+  <input type = "text" name = "long2" placeholder="Longitude 2"></input>
+  <br><br>
+  <input type = "text" name = "lat3" placeholder="Latitude 3"></input>
+  <input type = "text" name = "long3" placeholder="Longitude 3"></input>
+  <input type="submit" name="submit" value="Find Midpoint!"></input>
+</form>
+
