@@ -103,25 +103,35 @@ def maps():
         elif request.form["submit"] == "Find On Map":
             lat = request.form["lat"]
             long = request.form["long"]
-            print (long + "----" + lat)
             stuff = util.numTo( lat, long )
+            print(stuff)
             if (stuff["ERROR"] != "NO"):
                 return render_template("test.html", error = stuff["ERROR"])
             base = [stuff["add"], stuff["lat"], stuff["long"]]
-        
-            dictio = util.nearHere(long, lat)
-            if dictio["ERROR"] != "NO":
+
+            dictio = {}
+            dictio = util.nearHere(stuff["long"], stuff["lat"])
+            if dictio["ERROR"] == "NO":
                 dictio.pop("ERROR", None)
-            else:
-                return render_template("maps.html", base = base)
+            #dictio should now haev a list of five places by name
+
+            lis = []
             i = 0
-            #places[]
             while (i<5):
-                #place[]
-                #place[0] = 
-                #places[i] = 
+                try:
+                    print (dictio[i])
+                    placeinfo = nameTo(dictio[i]);
+                    print placeinfo
+                    print "________________________"
+                    lis.append([ placeinfo["add"], placeinfo["lat"], placeinfo["long"]])
+                    #lis[i][0] = placeinfo["add"]
+                    #lis[i][1] = placeinfo["lat"]
+                    #lis[i][2] = placeinfo["long"]
+                except:
+                    print "No more results"
                 i+=1
-            #place == DICT#################3 ?
+            print lis
+            return render_template("map3.html", base = base, places = lis)
             return render_template("map.html",  base = base)
         else:
             lat = request.form["lat"]

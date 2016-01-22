@@ -34,7 +34,7 @@ def nameTo(add):
     print add
     key = "AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
     query = "https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s" % (add, key)
-
+    print query
 
     #%s&go=&qs=n&sk=&sc=8-13&first=%s' % (quoted_query, page)
 
@@ -86,8 +86,8 @@ def nearHere(longi, lat):
     #query = "https://maps.googleapis.com/maps/api/place/radarsearch/json?location="+lat+","+longi+"&radius=5000&types=food|cafe&keyword=vegetarian&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
     query = "https://maps.googleapis.com/maps/api/place/radarsearch/json?location="+lat+","+longi+"&radius=500&types=food|cafe&key=AIzaSyC1HeKfjwS4x0KYw_Wgl5-IxLBELfa4oO0"
     print query
-    print "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
-    print
+    #print "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
+    #print
     print "Lat: "+str(lat)
     print "long: "+str(longi)
     #print "Reached here----------"
@@ -211,5 +211,6 @@ if __name__=='__main__':
     #lng = result["results"][0]["geometry"]["location"]["lng"]
     #print result["results"][0]["address_components"]
     #return jsonify(result["results"][0])
-    nearHere(-73.961452,40.714224)
+    #nearHere(-73.961452,40.714224)
     #nearHere(-73.7815126,42.3903615) 
+    print(nameTo("100-11 Metropolitan Ave, Forest Hills, NY 11375, United States"))
