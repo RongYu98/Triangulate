@@ -62,6 +62,7 @@ def test():
             if (stuff["ERROR"] != "NO"):
                 return render_template("test.html", error = stuff["ERROR"])
             return render_template("map.html", lati = stuff["lat"], longi = stuff["long"])
+            """
         elif request.form["submit"] == "Find Midpoint":
             lat1 = request.form["lat1"]
             long1 = request.form["long1"]
@@ -80,7 +81,7 @@ def test():
             midpoint = findmid.geoMin()
             midd = util.numTo(midpoint
             return render_template("mid.html",mid=midpoint)
-            
+            """
         else:
             lat = request.form["lat"]
             long = request.form["long"]
