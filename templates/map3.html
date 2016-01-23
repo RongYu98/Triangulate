@@ -11,8 +11,9 @@
 
   <script type="text/javascript">
     var locations = [
+      {% set count = 1 %}
       {% for n in places %}
-      ['{{places[n][0]}}', {{places[n][1]}}, {{palces[n][2]}}, n+6],
+      ['{{n[0]}}', {{n[1]}}, {{n[2]}}, {{loop.index}}], 
       {% endfor %}
       ['{{base[0]}}', {{base[1]}}, {{base[2]}}, 6]
     ];

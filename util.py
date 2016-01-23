@@ -213,4 +213,8 @@ if __name__=='__main__':
     #return jsonify(result["results"][0])
     #nearHere(-73.961452,40.714224)
     #nearHere(-73.7815126,42.3903615) 
-    print(nameTo("100-11 Metropolitan Ave, Forest Hills, NY 11375, United States"))
+    dictio = {0: u'9030 Metropolitan Ave, Rego Park, NY 11374, United States', 1: u'68-19 Woodhaven Blvd, Flushing, NY 11374, United States', 2: u'100-05 Metropolitan Ave, Forest Hills, NY 11375, United States', 3: u'100-11 Metropolitan Ave, Forest Hills, NY 11375, United States', 4: u'73-11 Yellowstone Blvd, Forest Hills, NY 11375, United States'}
+    i = 0
+    while (i<5):
+        print(nameTo(dictio[i]))
+        i+=1

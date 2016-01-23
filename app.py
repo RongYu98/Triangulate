@@ -117,10 +117,14 @@ def maps():
 
             lis = []
             i = 0
+            print dictio
+            #print (nameTo(dictio[i]))
             while (i<5):
                 try:
-                    print (dictio[i])
-                    placeinfo = nameTo(dictio[i]);
+                    #print (dictio[i])
+                    print "________________________"
+                    #print (util.nameTo(dictio[i]))
+                    placeinfo = util.nameTo(dictio[i])
                     print placeinfo
                     print "________________________"
                     lis.append([ placeinfo["add"], placeinfo["lat"], placeinfo["long"]])
@@ -131,6 +135,7 @@ def maps():
                     print "No more results"
                 i+=1
             print lis
+            print "__________________"
             return render_template("map3.html", base = base, places = lis)
             return render_template("map.html",  base = base)
         else:
