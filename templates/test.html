@@ -47,12 +47,12 @@
                     Error: {{error}}
                     {% endif %}
                     {% if loc %}
-                    <font color="SlateGray">Location Searched:</font> {{loc | safe}}
+                    <font color="SlateGray"><b>Location Searched:</b></font> {{loc | safe}}
                     {% endif %}
 
                     <br>
                     {% if loc %}
-                    Address Found: {{add}}
+                    <b>Address Found:</b> {{add}}
                     <br>
                     {% endif %}
                     {% if lat %}
@@ -65,10 +65,10 @@
                     {% endif %}
                     <br>
                     {% if result %}
-                    <b>Not it? Well, here are some other locations that matched your keyword:</b></b><br><br>
+                    <b><font color="SlateBlue">Not it? Well, here are some other locations that matched your keyword:</font></b><br><br>
                     {% for key, value in result.iteritems() %}
-                    <font color="SlateGray">Location: {{key+1}}.</font> {{value}}
-                    <br>
+                    <b><font color="SlateGray">Location: {{key+1}}.</font></b> {{value}}
+                    <br><br>
                     {% endfor %}
                     {% endif %}
 
