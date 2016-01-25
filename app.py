@@ -269,7 +269,7 @@ def register():
         else:
             return render_template('register.html',err="That username is taken!")
 
-@app.route('/index', methods=["GET","POST"])
+@app.route('/home', methods=["GET","POST"])
 def home():
     if verify():
         user=''
