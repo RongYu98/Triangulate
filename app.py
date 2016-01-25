@@ -106,7 +106,43 @@ def test():
             midpoint_metric = findmid.findTheMiddle("metric")
             
             return render_template("test.html",midpoint_imperial=midpoint_imperial, midpoint_metric=midpoint_metric)
-            
+        elif request.form["submit"] == "Find places nearby with food":
+            lat = request.form["lat"]
+            long = request.form["long"]
+            stuff = util.numTo( lat, long )
+            print(stuff)
+            if (stuff["ERROR"] != "NO"):
+                return render_template("test.html", error = stuff["ERROR"])
+            base = [stuff["add"], stuff["lat"], stuff["long"]]
+
+            dictio = {}
+            dictio = util.nearHere(stuff["long"], stuff["lat"])
+            if dictio["ERROR"] == "NO":
+                dictio.pop("ERROR", None)
+            #dictio should now haev a list of five places by name
+
+            lis = []
+            i = 0
+            print dictio
+            #print (nameTo(dictio[i]))
+            while (i<5):
+                try:
+                    #print (dictio[i])
+                    print "________________________"
+                    #print (util.nameTo(dictio[i]))
+                    placeinfo = util.nameTo(dictio[i])
+                    print placeinfo
+                    print "________________________"
+                    lis.append([ placeinfo["add"], placeinfo["lat"], placeinfo["long"]])
+                    #lis[i][0] = placeinfo["add"]
+                    #lis[i][1] = placeinfo["lat"]
+                    #lis[i][2] = placeinfo["long"]
+                except:
+                    print "No more results"
+                i+=1
+            print lis
+            print "__________________"
+            return render_template("map3.html", base = base, places = lis)
         else:
             lat = request.form["lat"]
             long = request.form["long"]
