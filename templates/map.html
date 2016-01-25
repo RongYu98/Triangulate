@@ -16,7 +16,7 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-     <title>Simple markers</title>
+     <title>Triangulate - Map</title>
      <style>
        html,body {
          height: 100%;
@@ -25,8 +25,8 @@
        }
        #map {
          height: 75%;
-         margin: 10%;
-         padding: 15%;
+         margin: 5%;
+         padding: 5%;
        }
      </style>
    </head>
@@ -50,16 +50,19 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="/">Home</a>
+                        <a href="/">{{user}}</a>
                     </li>
                     <li>
-                        <a href="/about">About</a>
+                        <a href="/make">Post</a>
                     </li>
                     <li>
-                        <a href="/login">Login</a>
+                        <a href="/home">View</a>
                     </li>
                     <li>
-                        <a href="/register">Register</a>
+                        <a href="/logout">Logout</a>
+                    </li>
+                    <li>
+                        <a href="/search">Find Location</a>
                     </li>
                 </ul>
             </div>
@@ -83,7 +86,7 @@
     </header>
     
     
-
+ <center><font color="SteelBlue">The location you search for is...Latitude:{{lati}} Longitude:{{longi}}</font></center>
      <div id="map"></div>
      <script>
  
