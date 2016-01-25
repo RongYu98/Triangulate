@@ -68,7 +68,7 @@ def test():
                 return render_template("test.html", error = stuff["ERROR"])
             return render_template("map.html", user=user, lati = stuff["lat"], longi = stuff["long"])
             
-        elif request.form["submit"] == "Find Midpoint":
+        elif request.form["submit"] == "Find the midpoint of the three locations":
             lat1 = float(request.form["lat1"])
             long1 = float(request.form["long1"])
             lat2 = float(request.form["lat2"])
@@ -86,6 +86,26 @@ def test():
             midpoint = findmid.geoMin()
 
             return render_template("test.html",midpoint=midpoint)
+        
+        elif request.form["submit"] == "Find the location where each person travels the minimum distance":
+            lat1 = float(request.form["lat1"])
+            long1 = float(request.form["long1"])
+            lat2 = float(request.form["lat2"])
+            long2 = float(request.form["long2"])
+            lat3 = float(request.form["lat3"])
+            long3 = float(request.form["long3"])
+            
+            pointa = (lat1, long1)
+            pointb = (lat2, long2)
+            pointc = (lat3, long3)
+            
+            coordinates = [pointa, pointb, pointc]
+            findmid.setLocations(coordinates)
+            
+            midpoint_imperial = findTheMiddle("imperial")
+            midpoint_metric = findTheMiddle("metric")
+            
+            return render_template("test.html",midpoint_imperial=midpoint_imperial, midpoint_metric=midpoint_metric)
             
         else:
             lat = request.form["lat"]
