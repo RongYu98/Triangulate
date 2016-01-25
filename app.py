@@ -102,8 +102,8 @@ def test():
             coordinates = [pointa, pointb, pointc]
             findmid.setLocations(coordinates)
             
-            midpoint_imperial = findTheMiddle("imperial")
-            midpoint_metric = findTheMiddle("metric")
+            midpoint_imperial = findmid.findTheMiddle("imperial")
+            midpoint_metric = findmid.findTheMiddle("metric")
             
             return render_template("test.html",midpoint_imperial=midpoint_imperial, midpoint_metric=midpoint_metric)
             
