@@ -3,7 +3,7 @@ import urllib2
 import json
 from math import cos, sin, sqrt, atan2, pi, radians, degrees, asin
 
-coords = []
+coords = [] 
 
 def setLocations(inputLocations):
     global coords
