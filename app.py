@@ -34,9 +34,13 @@ def nameToNumbers():
 @app.route("/search",methods=["GET","POST"])
 def test():
     if request.method == "GET":
+        if verify():
+            user = session['username']
         return render_template("test.html")
     else:
         #request.method == "GET":
+        if verify():
+            user = session['username']
         if request.form["submit"] == "Find By Name":
             query = request.form["place"]
             #print(request.form["place"])
