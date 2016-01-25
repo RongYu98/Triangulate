@@ -104,6 +104,8 @@ def maps():
     if request.method == "GET":
         return render_template("test.html")
     else:
+        if verify():
+            user = session['username']
         if request.form["submit"] == "Find By Name":
             query = request.form["place"]
             stuff = util.nameTo(query)
