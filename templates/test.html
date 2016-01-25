@@ -63,10 +63,11 @@
                     Lng: {{lng}}
                     <br>
                     {% endif %}
-
+                    <br>
                     {% if result %}
+                    <b>Here are some other locations that matched your keyword:</b></b><br><br>
                     {% for key, value in result.iteritems() %}
-                    Location: {{key+1}}. {{value}}
+                    <i>Location: {{key+1}}.</i> {{value}}
                     <br>
                     {% endfor %}
                     {% endif %}
