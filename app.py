@@ -31,7 +31,7 @@ def nameToNumbers():
     result = json.loads(result)
     return jsonify(result)
 
-@app.route("/test",methods=["GET","POST"])
+@app.route("/search",methods=["GET","POST"])
 def test():
     if request.method == "GET":
         return render_template("test.html")
@@ -269,7 +269,7 @@ def register():
         else:
             return render_template('register.html',err="That username is taken!")
 
-@app.route('/home', methods=["GET","POST"])
+@app.route('/index', methods=["GET","POST"])
 def home():
     if verify():
         user=''
