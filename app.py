@@ -46,7 +46,7 @@ def test():
                 dictio.pop("ERROR", None)
                 dictio[-1] = string
             #return result
-            return render_template("test.html", loc = query, lat = stuff["lat"], lng = stuff["long"], add = stuff["add"], result = dictio)
+            return render_template("test.html", user=user, loc = query, lat = stuff["lat"], lng = stuff["long"], add = stuff["add"], result = dictio)
         elif request.form["submit"] == "Find On Map":
             lat = request.form["lat"]
             long = request.form["long"]
@@ -73,7 +73,7 @@ def test():
             
             midpoint = findmid.geoMin()
 
-            return render_template("test.html",midpoint=midpoint)
+            return render_template("test.html",midpoint=midpoint,user=user)
         
         elif request.form["submit"] == "Find the location where each person travels the minimum distance":
             lat1 = float(request.form["lat1"])
@@ -93,7 +93,7 @@ def test():
             midpoint_imperial = findmid.findTheMiddle("imperial")
             midpoint_metric = findmid.findTheMiddle("metric")
             
-            return render_template("test.html",midpoint_imperial=midpoint_imperial, midpoint_metric=midpoint_metric)
+            return render_template("test.html",user=user,midpoint_imperial=midpoint_imperial, midpoint_metric=midpoint_metric)
         elif request.form["submit"] == "Find places nearby with food":
             if verify():
                 user = session['username']
@@ -147,7 +147,7 @@ def test():
                 err = dictio["ERROR"]
                 dictio.pop("ERROR", None)
                 dictio[-1] = err
-            return render_template("test.html", loc = "Latitude: "+str(lat)+" Longitude: "+str(long), lat = stuff["lat"], lng = stuff["long"], add = stuff["add"], result = dictio )
+            return render_template("test.html", user=user, loc = "Latitude: "+str(lat)+" Longitude: "+str(long), lat = stuff["lat"], lng = stuff["long"], add = stuff["add"], result = dictio )
 
 @app.route('/about')
 def about():
