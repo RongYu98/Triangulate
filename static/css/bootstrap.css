@@ -12,7 +12,10 @@ html {
 body {
   margin: 0;
 }
-article,
+ map {
+         height: 50%;
+         width: 100%;
+       }
 aside,
 details,
 figcaption,
