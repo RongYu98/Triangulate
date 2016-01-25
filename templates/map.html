@@ -1,6 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
+{% extends "base_on.html" %}
+
+{% block title %}Triangulate - {{user}}{% endblock %}
+
+{% block contents %}
+
+<head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Simple markers</title>
@@ -16,9 +20,28 @@
       }
     </style>
   </head>
-  <body>
-    <br><br>
-    The location you searched for is... latitude: {{lati}} longitude: {{longi}}
+
+<!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('../static/img/nyc.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Triangulate</h1>
+                        <hr class="small">
+                        <span class="subheading">{{user}}-Find Location</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <center><font color="SteelBlue">
+                <p>The location you searched for is... latitude: {{lati}} longitude: {{longi}}
     <br><br>
     <div id="map"></div>
     <script>
@@ -41,5 +64,15 @@ function initMap() {
     </script>
   <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz0WGFSUcbYkRx_Ah0jXYRk9BoKtjU7g4&signed_in=true&callback=initMap"></script>
-  </body>
-</html>
+  
+                  </p>
+
+                </font>
+                </center>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
