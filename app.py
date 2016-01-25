@@ -144,7 +144,7 @@ def test():
                 i+=1
             print lis
             print "__________________"
-            return render_template("map_food.html", user=user,base = base, places = lis)
+            return render_template("map_food.html", user=user,base = base, places = lis,lati = stuff["lat"], longi = stuff["long"])
         else:
             lat = request.form["lat"]
             long = request.form["long"]
