@@ -1,61 +1,43 @@
-{% extends "base_map.html" %}
-
-{% block title %}Triangulate - {{user}}{% endblock %}
-
-{% block contents %}
-
-<!-- Page Header -->
-    <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('../static/img/nyc.jpg')">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="page-heading">
-                        <h1>Triangulate</h1>
-                        <hr class="small">
-                        <span class="subheading">{{user}}-Find Location</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- Main Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <center><font color="SteelBlue">
-                <p>The location you searched for is... latitude: {{lati}} longitude: {{longi}}
-    <br><br>
-    <div id="map">
-    <script>
-
-function initMap() {
-  var myLatLng = {lat: {{lati}}, lng: {{longi}}};
-
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 4,
-    center: myLatLng
-  });
-
-  var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-    title: 'Hello World!'
-  });
-}
-
-    </script>
-  <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz0WGFSUcbYkRx_Ah0jXYRk9BoKtjU7g4&signed_in=true&callback=initMap"></script>
-  </div>
-                  </p>
-
-                </font>
-                </center>
-            </div>
-        </div>
-    </div>
-
-{% endblock %}
+<!DOCTYPE html>
+ <html>
+   <head>
+     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+     <meta charset="utf-8">
+     <title>Simple markers</title>
+     <style>
+       html, body {
+         height: 100%;
+         margin: 0;
+         padding: 0;
+       }
+       #map {
+         height: 100%;
+       }
+     </style>
+   </head>
+   <body>
+     <div id="map"></div>
+     <script>
+ 
+ function initMap() {
+   var myLatLng = {lat: {{lati}}, lng: {{longi}}};
+ 
+   var map = new google.maps.Map(document.getElementById('map'), {
+     zoom: 4,
+     center: myLatLng
+   });
+ 
+   var marker = new google.maps.Marker({
+     position: myLatLng,
+     map: map,
+     title: 'Hello World!'
+   });
+ }
+ 
+     </script>
+   <script async defer
+         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz0WGFSUcbYkRx_Ah0jXYRk9BoKtjU7g4&signed_in=true&callback=initMap"></script>
+   </body>
+ </html>
 
 
