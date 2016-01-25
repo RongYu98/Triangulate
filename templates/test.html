@@ -98,7 +98,17 @@
                       <input type="submit" name="submit" value="Find the location where each person travels the minimum distance" class="btn btn-default"></input>
                     </form>
                     <br><br>
-                  {{midpoint}}
+                    {% if midpoint %}
+                    <b>Midpoint: </b>{{midpoint}}
+                    {% end if %}
+                    
+                    {% if midpoint_imperial %}
+                    <b>Location in imperial units: </b> {{midpoint_imperial}}
+                    {% end if %}
+                    
+                    {% if midpoint_metric %}
+                    <b>Location in metric units: </b> {{midpoint_metric}}
+                    {% end if %}
                   </p>
 
                 </font>
