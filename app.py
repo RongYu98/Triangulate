@@ -107,6 +107,8 @@ def test():
             
             return render_template("test.html",midpoint_imperial=midpoint_imperial, midpoint_metric=midpoint_metric)
         elif request.form["submit"] == "Find places nearby with food":
+            if verify():
+                user = session['username']
             lat = request.form["lat"]
             long = request.form["long"]
             stuff = util.numTo( lat, long )
@@ -142,7 +144,7 @@ def test():
                 i+=1
             print lis
             print "__________________"
-            return render_template("map3.html", base = base, places = lis)
+            return render_template("map_food.html", user=user,base = base, places = lis)
         else:
             lat = request.form["lat"]
             long = request.form["long"]
