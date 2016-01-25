@@ -223,6 +223,10 @@ def nearHere():
     return jsonify(result)
     #return jsonify(util.byPlaceID(l[0]))
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 #*******~USER FUNCTIONS~*******#
 
 def verify():
