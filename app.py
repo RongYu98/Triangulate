@@ -66,7 +66,7 @@ def test():
             stuff = util.numTo( lat, long )
             if (stuff["ERROR"] != "NO"):
                 return render_template("test.html", error = stuff["ERROR"])
-            return render_template("map.html", lati = stuff["lat"], longi = stuff["long"])
+            return render_template("map.html", user=user, lati = stuff["lat"], longi = stuff["long"])
             
         elif request.form["submit"] == "Find Midpoint":
             lat1 = float(request.form["lat1"])
