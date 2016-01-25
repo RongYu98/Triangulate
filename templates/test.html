@@ -34,7 +34,7 @@
                   </form>
                     <br><br>
                   <form method = "POST">
-                    Search for a location by coordinates:<br>
+                    Search for a location by coordinates:<br><br>
                     <input type = "text" name = "lat" placeholder="Latitude"></input>
                     <input type = "text" name = "long" placeholder="Longitude"></input><br><br>
                     <input type="submit" name="submit" value="Find By Coordinate" class="btn btn-default"></input>
@@ -47,7 +47,7 @@
                     Error: {{error}}
                     {% endif %}
                     {% if loc %}
-                    Location Searched: {{loc | safe}}
+                    <font color="SlateGray">Location Searched:</font> {{loc | safe}}
                     {% endif %}
 
                     <br>
@@ -56,18 +56,18 @@
                     <br>
                     {% endif %}
                     {% if lat %}
-                    Lat: {{lat}}
-                    <br>
+                    <b>Latitude:</b> {{lat}}
+                    <br><br>
                     {% endif %}
                     {% if lng %}
-                    Lng: {{lng}}
+                    <b>Longitude:</b> {{lng}}
                     <br>
                     {% endif %}
                     <br>
                     {% if result %}
-                    <b>Here are some other locations that matched your keyword:</b></b><br><br>
+                    <b>Not it? Well, here are some other locations that matched your keyword:</b></b><br><br>
                     {% for key, value in result.iteritems() %}
-                    <i>Location: {{key+1}}.</i> {{value}}
+                    <font color="SlateGray">Location: {{key+1}}.</font> {{value}}
                     <br>
                     {% endfor %}
                     {% endif %}
