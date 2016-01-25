@@ -34,9 +34,10 @@ def nameToNumbers():
 @app.route("/search",methods=["GET","POST"])
 def test():
     if request.method == "GET":
-        if verify():
-            user = session['username']
-        return render_template("test.html")
+        user=''
+        if 'username' in session:
+            user=session['username']
+        return render_template("test.html", user=user)
     else:
         #request.method == "GET":
         if verify():
@@ -106,10 +107,14 @@ def test():
 @app.route("/maps",methods=["GET","POST"]) #will currently only apply to the second box
 def maps():
     if request.method == "GET":
-        return render_template("test.html")
+        user=''
+        if 'username' in session:
+            user=session['username']
+        return render_template("test.html",user=user)
     else:
-        if verify():
-            user = session['username']
+        user=''
+        if 'username' in session:
+            user=session['username']
         if request.form["submit"] == "Find By Name":
             query = request.form["place"]
             stuff = util.nameTo(query)
