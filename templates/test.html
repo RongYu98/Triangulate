@@ -99,6 +99,28 @@
                       <input type="submit" name="submit" value="Find the location where each person travels the minimum distance" class="btn btn-default"></input>
                     </form>
                     <br><br>
+
+                    <hr>
+                    <p>
+                        <font color ="green">
+                    <form method = "POST">
+                      <b>Search for the midpoint between three locations:</b>
+                      <br><br>
+                      Location 1: 
+                     <input type = "text" name = "add1" placeholder="Address 1"></input>
+                     <br><br>
+                      Location 2: 
+                      <input type = "text" name = "add2" placeholder="Address 2"></input>
+                     <br><br>
+                     Location 3: 
+                      <input type = "text" name = "add3" placeholder="Address 3"></input>
+                     <br><br>
+                      <input type="submit" name="submit" value="Find the midpoint of the three addresses" class="btn btn-default"></input>
+                      <br><br>
+                      <input type="submit" name="submit" value="Find the location where each person travels the minimum distance " class="btn btn-default"></input>
+                    </form>
+                    <br><br>
+
                     {% if midpoint %}
                     <b>Midpoint: </b>{{midpoint}}
                     {% endif %}
