@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
+from werkzeug.contrib.fixers import ProxyFix
 import urllib2
 import json
 import util, findmid
@@ -252,8 +253,8 @@ def logout():
     return redirect(url_for('login'))
 
 #*******~MAIN~*******#
-
+app.wsgi_app = ProxyFix(app.wsgi_app)
+app.secret_key = "secret"
 if (__name__ == "__main__"):
         app.debug = True
-        app.secret_key = "secret"
-        app.run(host='0.0.0.0', port=8000)
+        app.run(host='162.243.24.220')
