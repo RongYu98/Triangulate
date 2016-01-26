@@ -32,7 +32,6 @@ def test():
             user = session['username']
         if request.form["submit"] == "Find By Name":
             query = request.form["place"]
-            #print(request.form["place"])
             stuff = util.nameTo(query)
             if (stuff["ERROR"] != "NO"):
                 return render_template("test.html", error = stuff["ERROR"])
@@ -94,6 +93,52 @@ def test():
             midpoint_metric = findmid.findTheMiddle("metric")
             
             return render_template("test.html",user=user,midpoint_imperial=midpoint_imperial, midpoint_metric=midpoint_metric)
+
+
+        elif request.form["submit"] == "Find the midpoint of the three addresses":
+            add1 =  request.form["add1"]
+            add2 =  request.form["add2"]
+            add3 =  request.form["add3"]
+            
+            ADD1 = util.nameTo(add1)
+            ADD2 = util.nameTo(add2)
+            ADD3 = util.nameTo(add3)
+            
+            pointa = (ADD1["lat"], ADD1["long"])
+            pointb = (ADD2["lat"], ADD2["long"])
+            pointc = (ADD3["lat"], ADD3["long"])
+            
+            coordinates = [pointa, pointb, pointc]
+            findmid.setLocations(coordinates)
+            
+            midpoint = findmid.geoMin()
+
+            return render_template("test.html",midpoint=midpoint,user=user)
+        
+        elif request.form["submit"] == "Find the location where each person travels the minimum distance ":
+            add1 =  request.form["add1"]
+            add2 =  request.form["add2"]
+            add3 =  request.form["add3"]
+            
+            ADD1 = util.nameTo(add1)
+            ADD2 = util.nameTo(add2)
+            ADD3 = util.nameTo(add3)
+            
+            pointa = (ADD1["lat"], ADD1["long"])
+            pointb = (ADD2["lat"], ADD2["long"])
+            pointc = (ADD3["lat"], ADD3["long"])
+            
+            coordinates = [pointa, pointb, pointc]
+            findmid.setLocations(coordinates)
+            
+            midpoint_imperial = findmid.findTheMiddle("imperial")
+            midpoint_metric = findmid.findTheMiddle("metric")
+            
+            return render_template("test.html",user=user,midpoint_imperial=midpoint_imperial, midpoint_metric=midpoint_metric)
+
+
+
+
         elif request.form["submit"] == "Find places nearby with food":
             if verify():
                 user = session['username']
