@@ -1,5 +1,6 @@
-# Triangulate - http://triangulate.soon.it/
+# Triangulate - http://162.243.24.220/about
 * By Jason Shin, Franklin Wang, Rong Yu, and Masahero Masuda
+* Youtube Video - https://youtu.be/IvY4lHbtN5c
 
 ## What's this app?
 * Triangulate is an application that will allow you to find the most
